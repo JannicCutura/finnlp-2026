@@ -1,0 +1,34 @@
+{
+  "String / entity matching": {
+    "desc": "case-sensitivity or wrong match operator (STRSTARTS vs CONTAINS vs case-insensitive regex)",
+    "ids": [
+      "h01",
+      "h05",
+      "h34",
+      "h38"
+    ]
+  },
+  "Literal typing": {
+    "desc": "date literal typed \texttt{xsd:date} while the graph stores \texttt{xsd:dateTime}",
+    "ids": [
+      "h22",
+      "h75"
+    ]
+  },
+  "Wrong predicate / value / scope": {
+    "desc": "transitive where direct was meant, wrong ELF code, or an over-cautious abstention",
+    "ids": [
+      "h15",
+      "h62",
+      "h68"
+    ]
+  },
+  "Result shape / aggregation": {
+    "desc": "COUNT/DISTINCT multiplicity or wrong columns returned (the compound abstention items)",
+    "ids": [
+      "h03",
+      "h28",
+      "h82"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+# Python 3.13. Create the venv OUTSIDE any synced folder (a venv is tens of
+# thousands of small files):
+#   python -m venv ~/.venvs/finnlp2026
+#   ~/.venvs/finnlp2026/Scripts/python -m pip install -r requirements.txt
+pyoxigraph==0.5.9
+rdflib==7.6.0
+requests==2.34.2

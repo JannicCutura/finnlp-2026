@@ -1,0 +1,361 @@
+[
+  {"id":"h01","tier":"a","family":"F3","skill":"entity-resolution",
+   "question":"List the LEIs of all entities incorporated in Germany whose legal name begins with 'DEUTSCHE BANK'.",
+   "gold":"SELECT ?lei WHERE { ?e gleif-L1:hasLegalName ?n ; gleif-L1:LEI ?lei ; gleif-base:hasLegalJurisdiction jur:DE . FILTER(STRSTARTS(?n, \"DEUTSCHE BANK\")) }"},
+
+  {"id":"h02","tier":"a","family":"F3","skill":"entity-resolution",
+   "question":"Which entities have a legal name containing 'BREVAN HOWARD MACRO OPPORTUNITIES'? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?e gleif-L1:hasLegalName ?n . FILTER(CONTAINS(?n, \"BREVAN HOWARD MACRO OPPORTUNITIES\")) }"},
+
+  {"id":"h03","tier":"a","family":"F3","skill":"entity-resolution",
+   "question":"How many entities have a legal name containing the word 'Kapitalverwaltungsgesellschaft'?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-L1:hasLegalName ?nm . FILTER(CONTAINS(?nm, \"Kapitalverwaltungsgesellschaft\")) }"},
+
+  {"id":"h04","tier":"a","family":"F3","skill":"entity-resolution-case",
+   "question":"Find the LEI of the entity whose legal name, ignoring capitalisation, is exactly 'siemens aktiengesellschaft'.",
+   "gold":"SELECT ?lei WHERE { ?e gleif-L1:hasLegalName ?n ; gleif-L1:LEI ?lei . FILTER(LCASE(?n) = \"siemens aktiengesellschaft\") }"},
+
+  {"id":"h05","tier":"a","family":"F2","skill":"entity-resolution",
+   "question":"What legal forms are used by entities whose legal name starts with 'BLACKROCK GLOBAL'? Give the distinct legal form names.",
+   "gold":"SELECT DISTINCT ?label WHERE { ?e gleif-L1:hasLegalName ?n ; gleif-L1:hasLegalForm ?f . ?f rdfs:label ?label . FILTER(STRSTARTS(?n, \"BLACKROCK GLOBAL\")) }"},
+
+  {"id":"h06","tier":"d","family":"F7","skill":"status-distinction-trap",
+   "question":"How many entities have entity status ACTIVE but registration status LAPSED?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasEntityStatus gleif-base:ACTIVE ; gleif-base:hasRegistrationStatus gleif-L1:LAPSED }"},
+
+  {"id":"h07","tier":"b","family":"F4","skill":"direct-vs-ultimate",
+   "question":"For the entity with LEI 5493002WI30SR6SIUH74, give the legal name of its direct consolidation parent and the legal name of its ultimate consolidation parent.",
+   "gold":"SELECT ?d ?u WHERE { ?c gleif-L1:LEI \"5493002WI30SR6SIUH74\" ; kgx:hasDirectConsolidationParent ?dp ; kgx:hasUltimateConsolidationParent ?up . ?dp gleif-L1:hasLegalName ?d . ?up gleif-L1:hasLegalName ?u }"},
+
+  {"id":"h08","tier":"e","family":"F8","skill":"direct-vs-ultimate",
+   "question":"How many entities report a direct consolidation parent that is different from their ultimate consolidation parent?",
+   "gold":"SELECT (COUNT(DISTINCT ?c) AS ?n) WHERE { ?c kgx:hasDirectConsolidationParent ?d ; kgx:hasUltimateConsolidationParent ?u . FILTER(?d != ?u) }"},
+
+  {"id":"h09","tier":"d","family":"F7","skill":"status-distinction-trap",
+   "question":"How many entities have entity status INACTIVE and registration status LAPSED?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasEntityStatus gleif-base:INACTIVE ; gleif-base:hasRegistrationStatus gleif-L1:LAPSED }"},
+
+  {"id":"h10","tier":"d","family":"F7","skill":"multi-constraint",
+   "question":"How many entities are classified as funds and also have registration status LAPSED?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e a gleif-L1:Fund ; gleif-base:hasRegistrationStatus gleif-L1:LAPSED }"},
+
+  {"id":"h11","tier":"d","family":"F7","skill":"negation",
+   "question":"How many entities registered in Germany with status ISSUED have no direct consolidation parent recorded?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasLegalJurisdiction jur:DE ; gleif-base:hasRegistrationStatus gleif-L1:ISSUED . FILTER NOT EXISTS { ?e kgx:hasDirectConsolidationParent ?p } }"},
+
+  {"id":"h12","tier":"d","family":"F7","skill":"negation",
+   "question":"How many entities classified as funds have no fund manager recorded?",
+   "gold":"SELECT (COUNT(?f) AS ?n) WHERE { ?f a gleif-L1:Fund . FILTER NOT EXISTS { ?f kgx:hasFundManager ?m } }"},
+
+  {"id":"h13","tier":"e","family":"F8","skill":"negation-composition",
+   "question":"How many entities are the direct consolidation parent of at least one entity while having no direct consolidation parent of their own?",
+   "gold":"SELECT (COUNT(DISTINCT ?p) AS ?n) WHERE { ?c kgx:hasDirectConsolidationParent ?p . FILTER NOT EXISTS { ?p kgx:hasDirectConsolidationParent ?g } }"},
+
+  {"id":"h14","tier":"e","family":"F8","skill":"negation",
+   "question":"How many entities with registration status ISSUED have neither a direct consolidation parent nor any reporting exception?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED . FILTER NOT EXISTS { ?e kgx:hasDirectConsolidationParent ?p } FILTER NOT EXISTS { ?x gleif-re:hasReportingEntity ?e } }"},
+
+  {"id":"h15","tier":"c","family":"F6","skill":"composition",
+   "question":"How many funds are managed by the same entity that manages the fund 'VDDKO - MASTERFONDS'?",
+   "gold":"SELECT (COUNT(DISTINCT ?f2) AS ?n) WHERE { ?f gleif-L1:hasLegalName \"VDDKO - MASTERFONDS\" ; kgx:hasFundManager ?m . ?f2 kgx:hasFundManager ?m }"},
+
+  {"id":"h16","tier":"c","family":"F6","skill":"three-hop",
+   "question":"In which jurisdiction is the manager of the umbrella fund of the sub-fund 'NT Global Green Bond Index Fund' incorporated?",
+   "gold":"SELECT DISTINCT ?j WHERE { ?s gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" ; kgx:hasUmbrellaFund ?u . ?u kgx:hasFundManager ?m . ?m gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h17","tier":"c","family":"F5","skill":"reverse-transitive",
+   "question":"How many entities have 'Siemens Aktiengesellschaft' as a consolidation ancestor, following direct consolidation parents transitively?",
+   "gold":"SELECT (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p gleif-L1:hasLegalName \"Siemens Aktiengesellschaft\" . ?d kgx:hasDirectConsolidationParent+ ?p }"},
+
+  {"id":"h18","tier":"c","family":"F6","skill":"composition",
+   "question":"What is the legal form name of the ultimate consolidation parent of the entity with LEI 5493002WI30SR6SIUH74?",
+   "gold":"SELECT ?label WHERE { ?c gleif-L1:LEI \"5493002WI30SR6SIUH74\" ; kgx:hasUltimateConsolidationParent ?p . ?p gleif-L1:hasLegalForm ?f . ?f rdfs:label ?label }"},
+
+  {"id":"h19","tier":"c","family":"F8","skill":"composition-aggregate",
+   "question":"How many distinct jurisdictions do the direct consolidation subsidiaries of 'Bank of America, National Association' span?",
+   "gold":"SELECT (COUNT(DISTINCT ?j) AS ?n) WHERE { ?p gleif-L1:hasLegalName \"Bank of America, National Association\" . ?c kgx:hasDirectConsolidationParent ?p ; gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h20","tier":"e","family":"F8","skill":"aggregate-with-exclusion",
+   "question":"Among ISSUED entities incorporated in Luxembourg, which three legal forms are most common, excluding the placeholder codes 8888 and 9999? Give the legal form name and the count.",
+   "gold":"SELECT ?label (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasLegalJurisdiction jur:LU ; gleif-base:hasRegistrationStatus gleif-L1:ISSUED ; gleif-L1:hasLegalForm ?f . ?f rdfs:label ?label . FILTER(?f != elf:8888 && ?f != elf:9999) } GROUP BY ?label ORDER BY DESC(?n) LIMIT 3"},
+
+  {"id":"h21","tier":"e","family":"F8","skill":"aggregate",
+   "question":"Which three jurisdictions have the most entities with registration status LAPSED? Give the jurisdiction and the count.",
+   "gold":"SELECT ?j (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasRegistrationStatus gleif-L1:LAPSED ; gleif-base:hasLegalJurisdiction ?j } GROUP BY ?j ORDER BY DESC(?n) LIMIT 3"},
+
+  {"id":"h22","tier":"e","family":"F8","skill":"date-filter",
+   "question":"How many entities with registration status ISSUED were initially registered before 1 January 2015?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED ; gleif-base:hasInitialRegistrationDate ?d . FILTER(?d < \"2015-01-01T00:00:00Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) }"},
+
+  {"id":"h23","tier":"e","family":"F8","skill":"aggregate-ascending",
+   "question":"What are the two least frequently used reporting exception reasons, and how many times is each used?",
+   "gold":"SELECT ?r (COUNT(?x) AS ?n) WHERE { ?x gleif-re:hasExceptionReason ?r } GROUP BY ?r ORDER BY ASC(?n) LIMIT 2"},
+
+  {"id":"h24","tier":"f2","family":"F10","skill":"absent-attribute","expect_empty":true,
+   "question":"What is the street address of DEUTSCHE BANK AKTIENGESELLSCHAFT?",
+   "gold":"SELECT ?street WHERE { ?e gleif-L1:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" ; gleif-base:hasAddressLine1 ?street }"},
+
+  {"id":"h25","tier":"f2","family":"F10","skill":"absent-attribute","expect_empty":true,
+   "question":"What is the market capitalisation of Allianz SE?",
+   "gold":"SELECT ?mc WHERE { ?e gleif-L1:hasLegalName \"Allianz SE\" ; gleif-base:isQuantifiedBy ?mc }"},
+
+  {"id":"h26","tier":"f2","family":"F10","skill":"absent-attribute","expect_empty":true,
+   "question":"On what date did 'Bank of America, National Association' acquire its subsidiaries?",
+   "gold":"SELECT ?d WHERE { ?e gleif-L1:hasLegalName \"Bank of America, National Association\" ; gleif-base:hasEntityExpirationDate ?d }"},
+
+  {"id":"h27","tier":"f3","family":"F11","skill":"nonexistent","expect_empty":true,
+   "question":"What is the legal name of the entity with LEI 11111111111111111111?",
+   "gold":"SELECT ?n WHERE { ?e gleif-L1:LEI \"11111111111111111111\" ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h28","tier":"f1","family":"F9","skill":"looks-unanswerable-but-is",
+   "question":"Does 'M-M FRANCE' report an ultimate consolidation parent? If it reports an exception instead, give the exception category and the reason.",
+   "gold":"SELECT DISTINCT ?cat ?r WHERE { ?e gleif-L1:hasLegalName \"M-M FRANCE\" . ?x gleif-re:hasReportingEntity ?e ; gleif-re:hasExceptionReason ?r ; a ?cat . FILTER(?cat != gleif-re:ReportingException) }"},
+
+  {"id":"h29","tier":"f1","family":"F9","skill":"reason-lookup",
+   "question":"For the entity with LEI 549300KX9MM0Z21Y1Q08, list the distinct reasons it gives for not reporting a consolidation parent.",
+   "gold":"SELECT DISTINCT ?r WHERE { ?e gleif-L1:LEI \"549300KX9MM0Z21Y1Q08\" . ?x gleif-re:hasReportingEntity ?e ; gleif-re:hasExceptionReason ?r }"},
+
+  {"id":"h30","tier":"b","family":"F5","skill":"downward-empty","expect_empty":true,
+   "question":"Which entities does 'M-M FRANCE' directly consolidate? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?p gleif-L1:hasLegalName \"M-M FRANCE\" . ?c kgx:hasDirectConsolidationParent ?p ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h31","tier":"a","family":"F2","skill":"multi-attribute",
+   "question":"Give the city and the jurisdiction code of the entity with LEI DQ2T0MMUTO0IPF9G9Z35.",
+   "gold":"SELECT ?city ?j WHERE { ?e gleif-L1:LEI \"DQ2T0MMUTO0IPF9G9Z35\" ; gleif-base:hasCity ?city ; gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h32","tier":"a","family":"F3","skill":"reverse-lookup",
+   "question":"What is the LEI of the fund whose legal name is exactly 'Sunriver Master Fund Ltd'?",
+   "gold":"SELECT ?lei WHERE { ?e gleif-L1:hasLegalName \"Sunriver Master Fund Ltd\" ; gleif-L1:LEI ?lei }"},
+
+  {"id":"h33","tier":"a","family":"F3","skill":"entity-resolution-case",
+   "question":"Find the LEI of the entity whose legal name, ignoring capitalisation, is exactly 'deutsche bank aktiengesellschaft'.",
+   "gold":"SELECT ?lei WHERE { ?e gleif-L1:hasLegalName ?n ; gleif-L1:LEI ?lei . FILTER(LCASE(?n) = \"deutsche bank aktiengesellschaft\") }"},
+
+  {"id":"h34","tier":"a","family":"F3","skill":"prefix-count",
+   "question":"How many entities have a legal name that begins with 'BLACKROCK'?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-L1:hasLegalName ?nm . FILTER(STRSTARTS(?nm, \"BLACKROCK\")) }"},
+
+  {"id":"h35","tier":"a","family":"F2","skill":"multi-attribute",
+   "question":"Give the legal name, city and registration status of the entity with LEI 7LTWFZYICNSX8D621K86.",
+   "gold":"SELECT ?n ?city ?rs WHERE { ?e gleif-L1:LEI \"7LTWFZYICNSX8D621K86\" ; gleif-L1:hasLegalName ?n ; gleif-base:hasCity ?city ; gleif-base:hasRegistrationStatus ?rs }"},
+
+  {"id":"h36","tier":"a","family":"F2","skill":"legal-form-name",
+   "question":"What is the legal form name of 'AMUNDI ASSET MANAGEMENT'?",
+   "gold":"SELECT DISTINCT ?label WHERE { ?e gleif-L1:hasLegalName \"AMUNDI ASSET MANAGEMENT\" ; gleif-L1:hasLegalForm ?f . ?f rdfs:label ?label }"},
+
+  {"id":"h37","tier":"a","family":"F1","skill":"identity",
+   "question":"What is the legal name of the entity with LEI O2RNE8IBXP4R0TD8PU41?",
+   "gold":"SELECT ?n WHERE { ?e gleif-L1:LEI \"O2RNE8IBXP4R0TD8PU41\" ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h38","tier":"a","family":"F3","skill":"substring-multilingual",
+   "question":"Which entities have a legal name containing 'Rückversicherungs'? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?e gleif-L1:hasLegalName ?n . FILTER(CONTAINS(?n, \"Rückversicherungs\")) }"},
+
+  {"id":"h39","tier":"a","family":"F2","skill":"attribute-date",
+   "question":"On what date was the entity with LEI W38RGI023J3WT1HWRP32 first registered?",
+   "gold":"SELECT ?d WHERE { ?e gleif-L1:LEI \"W38RGI023J3WT1HWRP32\" ; gleif-base:hasInitialRegistrationDate ?d }"},
+
+  {"id":"h40","tier":"a","family":"F3","skill":"substring-count-case",
+   "question":"How many entities have a legal name that, ignoring capitalisation, contains 'sicav'?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-L1:hasLegalName ?nm . FILTER(CONTAINS(LCASE(?nm), \"sicav\")) }"},
+
+  {"id":"h41","tier":"b","family":"F4","skill":"upward-direct",
+   "question":"What is the legal name of the direct consolidation parent of the entity with LEI RY5TAKFOBLDUGX31MS24?",
+   "gold":"SELECT ?pn WHERE { ?c gleif-L1:LEI \"RY5TAKFOBLDUGX31MS24\" ; kgx:hasDirectConsolidationParent ?p . ?p gleif-L1:hasLegalName ?pn }"},
+
+  {"id":"h42","tier":"b","family":"F4","skill":"upward-ultimate",
+   "question":"What is the legal name of the ultimate consolidation parent of the entity with LEI 9845004CCK6A37595986?",
+   "gold":"SELECT ?pn WHERE { ?c gleif-L1:LEI \"9845004CCK6A37595986\" ; kgx:hasUltimateConsolidationParent ?p . ?p gleif-L1:hasLegalName ?pn }"},
+
+  {"id":"h43","tier":"b","family":"F4","skill":"fund-manager",
+   "question":"Which entity manages the fund 'Sunriver Master Fund Ltd'? Give the manager's legal name.",
+   "gold":"SELECT ?mn WHERE { ?f gleif-L1:hasLegalName \"Sunriver Master Fund Ltd\" ; kgx:hasFundManager ?m . ?m gleif-L1:hasLegalName ?mn }"},
+
+  {"id":"h44","tier":"b","family":"F4","skill":"umbrella",
+   "question":"What is the umbrella fund of the sub-fund 'AMBIENTA X ALPHA PLUS FUND'? Give its legal name.",
+   "gold":"SELECT ?un WHERE { ?s gleif-L1:hasLegalName \"AMBIENTA X ALPHA PLUS FUND\" ; kgx:hasUmbrellaFund ?u . ?u gleif-L1:hasLegalName ?un }"},
+
+  {"id":"h45","tier":"b","family":"F4","skill":"master-fund",
+   "question":"What is the master fund that 'Domineer Global Emerging Markets Feeder Fund' feeds into? Give its legal name.",
+   "gold":"SELECT ?mn WHERE { ?f gleif-L1:hasLegalName \"Domineer Global Emerging Markets Feeder Fund\" ; kgx:hasMasterFund ?m . ?m gleif-L1:hasLegalName ?mn }"},
+
+  {"id":"h46","tier":"b","family":"F4","skill":"branch-head-office",
+   "question":"Of which head office is 'Caldic Hongkong Limited' a branch? Give the head office's legal name.",
+   "gold":"SELECT ?hn WHERE { ?b gleif-L1:hasLegalName \"Caldic Hongkong Limited\" ; kgx:hasBranchParent ?h . ?h gleif-L1:hasLegalName ?hn }"},
+
+  {"id":"h47","tier":"b","family":"F5","skill":"downward-direct",
+   "question":"Which entities are directly consolidated by 'MOSOLF SE & Co. KG'? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?p gleif-L1:hasLegalName \"MOSOLF SE & Co. KG\" . ?c kgx:hasDirectConsolidationParent ?p ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h48","tier":"b","family":"F5","skill":"downward-funds",
+   "question":"Which funds does 'GUARDIAN PARTNERS INC.' manage? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?m gleif-L1:hasLegalName \"GUARDIAN PARTNERS INC.\" . ?f kgx:hasFundManager ?m ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h49","tier":"b","family":"F4","skill":"upward-direct",
+   "question":"What is the legal name of the direct consolidation parent of the entity with LEI 52990071T42TKSDN2180?",
+   "gold":"SELECT ?pn WHERE { ?c gleif-L1:LEI \"52990071T42TKSDN2180\" ; kgx:hasDirectConsolidationParent ?p . ?p gleif-L1:hasLegalName ?pn }"},
+
+  {"id":"h50","tier":"b","family":"F5","skill":"downward-subfunds",
+   "question":"Which sub-funds belong to the umbrella fund 'Northern Trust Investment Funds plc'? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?u gleif-L1:hasLegalName \"Northern Trust Investment Funds plc\" . ?s kgx:hasUmbrellaFund ?u ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h51","tier":"b","family":"F5","skill":"downward-feeders",
+   "question":"Which feeder funds feed into 'BREVAN HOWARD MACRO OPPORTUNITIES MASTER FUND LIMITED'? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?m gleif-L1:hasLegalName \"BREVAN HOWARD MACRO OPPORTUNITIES MASTER FUND LIMITED\" . ?f kgx:hasMasterFund ?m ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h52","tier":"b","family":"F5","skill":"downward-branches",
+   "question":"Which branches have 'THE ONELIFE COMPANY S.A.' as their head office? Give their legal names.",
+   "gold":"SELECT ?n WHERE { ?h gleif-L1:hasLegalName \"THE ONELIFE COMPANY S.A.\" . ?b kgx:hasBranchParent ?h ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h53","tier":"c","family":"F6","skill":"two-hop-jurisdiction",
+   "question":"In which jurisdiction is the direct consolidation parent of the entity with LEI 52990071T42TKSDN2180 incorporated?",
+   "gold":"SELECT ?j WHERE { ?c gleif-L1:LEI \"52990071T42TKSDN2180\" ; kgx:hasDirectConsolidationParent ?p . ?p gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h54","tier":"c","family":"F6","skill":"three-hop",
+   "question":"What is the legal name of the fund manager of the umbrella fund of the sub-fund 'NT Emerging Markets Screened Equity Index Fund'?",
+   "gold":"SELECT DISTINCT ?mn WHERE { ?s gleif-L1:hasLegalName \"NT Emerging Markets Screened Equity Index Fund\" ; kgx:hasUmbrellaFund ?u . ?u kgx:hasFundManager ?m . ?m gleif-L1:hasLegalName ?mn }"},
+
+  {"id":"h55","tier":"c","family":"F6","skill":"two-hop-legalform",
+   "question":"What is the legal form name of the direct consolidation parent of 'AMERICAN AXLE & MANUFACTURING, INC.'?",
+   "gold":"SELECT ?label WHERE { ?c gleif-L1:hasLegalName \"AMERICAN AXLE & MANUFACTURING, INC.\" ; kgx:hasDirectConsolidationParent ?p . ?p gleif-L1:hasLegalForm ?f . ?f rdfs:label ?label }"},
+
+  {"id":"h56","tier":"c","family":"F5","skill":"reverse-transitive",
+   "question":"How many entities have 'DEUTSCHE BANK AKTIENGESELLSCHAFT' as a consolidation ancestor, following direct consolidation parents transitively?",
+   "gold":"SELECT (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p gleif-L1:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" . ?d kgx:hasDirectConsolidationParent+ ?p }"},
+
+  {"id":"h57","tier":"c","family":"F6","skill":"two-hop-city",
+   "question":"In which city is the ultimate consolidation parent of the entity with LEI 7890002FWCPTIGND4K41 located?",
+   "gold":"SELECT ?city WHERE { ?c gleif-L1:LEI \"7890002FWCPTIGND4K41\" ; kgx:hasUltimateConsolidationParent ?u . ?u gleif-base:hasCity ?city }"},
+
+  {"id":"h58","tier":"c","family":"F6","skill":"two-hop-jurisdiction",
+   "question":"In which jurisdiction is the manager of the fund 'I3 Global Equity Fund' incorporated?",
+   "gold":"SELECT ?j WHERE { ?f gleif-L1:hasLegalName \"I3 Global Equity Fund\" ; kgx:hasFundManager ?m . ?m gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h59","tier":"c","family":"F6","skill":"transitive-ancestors-list",
+   "question":"List the legal names of all consolidation ancestors of the entity with LEI 7890002FWCPTIGND4K41, following direct consolidation parents transitively.",
+   "gold":"SELECT DISTINCT ?an WHERE { ?c gleif-L1:LEI \"7890002FWCPTIGND4K41\" ; kgx:hasDirectConsolidationParent+ ?a . ?a gleif-L1:hasLegalName ?an }"},
+
+  {"id":"h60","tier":"c","family":"F6","skill":"two-hop-status",
+   "question":"What is the registration status of the umbrella fund of the sub-fund 'NT Global Green Bond Index Fund'?",
+   "gold":"SELECT ?rs WHERE { ?s gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" ; kgx:hasUmbrellaFund ?u . ?u gleif-base:hasRegistrationStatus ?rs }"},
+
+  {"id":"h61","tier":"c","family":"F8","skill":"composition-aggregate",
+   "question":"How many distinct jurisdictions do the direct consolidation subsidiaries of 'DEUTSCHE BANK AKTIENGESELLSCHAFT' span?",
+   "gold":"SELECT (COUNT(DISTINCT ?j) AS ?n) WHERE { ?p gleif-L1:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" . ?c kgx:hasDirectConsolidationParent ?p ; gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h62","tier":"c","family":"F6","skill":"composition-distinct",
+   "question":"What distinct legal form names do the direct consolidation subsidiaries of 'Allianz SE' have?",
+   "gold":"SELECT DISTINCT ?label WHERE { ?p gleif-L1:hasLegalName \"Allianz SE\" . ?c kgx:hasDirectConsolidationParent ?p ; gleif-L1:hasLegalForm ?f . ?f rdfs:label ?label }"},
+
+  {"id":"h63","tier":"d","family":"F7","skill":"multi-constraint",
+   "question":"How many entities are classified as funds and registered in Ireland?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e a gleif-L1:Fund ; gleif-base:hasLegalJurisdiction jur:IE }"},
+
+  {"id":"h64","tier":"d","family":"F7","skill":"negation",
+   "question":"How many entities registered in France have no ultimate consolidation parent recorded?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasLegalJurisdiction jur:FR . FILTER NOT EXISTS { ?e kgx:hasUltimateConsolidationParent ?p } }"},
+
+  {"id":"h65","tier":"d","family":"F7","skill":"status-distinction-trap",
+   "question":"How many entities have entity status ACTIVE but registration status RETIRED?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasEntityStatus gleif-base:ACTIVE ; gleif-base:hasRegistrationStatus gleif-L1:RETIRED }"},
+
+  {"id":"h66","tier":"d","family":"F7","skill":"multi-constraint",
+   "question":"How many entities are classified as branches and registered in the United Kingdom?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e a gleif-L1:Branch ; gleif-base:hasLegalJurisdiction jur:GB }"},
+
+  {"id":"h67","tier":"d","family":"F7","skill":"negation",
+   "question":"How many entities classified as funds have no umbrella fund recorded?",
+   "gold":"SELECT (COUNT(?f) AS ?n) WHERE { ?f a gleif-L1:Fund . FILTER NOT EXISTS { ?f kgx:hasUmbrellaFund ?u } }"},
+
+  {"id":"h68","tier":"d","family":"F7","skill":"legalform-filter",
+   "question":"How many entities registered in Germany have the legal form 'Gesellschaft mit beschränkter Haftung'?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasLegalJurisdiction jur:DE ; gleif-L1:hasLegalForm ?f . ?f rdfs:label \"Gesellschaft mit beschränkter Haftung\" }"},
+
+  {"id":"h69","tier":"d","family":"F7","skill":"class-jurisdiction",
+   "question":"How many sole proprietors are registered in Italy?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e a gleif-L1:SoleProprietor ; gleif-base:hasLegalJurisdiction jur:IT }"},
+
+  {"id":"h70","tier":"d","family":"F7","skill":"negation-status",
+   "question":"How many entities registered in the United States with registration status ISSUED have no direct consolidation parent recorded?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasLegalJurisdiction jur:US ; gleif-base:hasRegistrationStatus gleif-L1:ISSUED . FILTER NOT EXISTS { ?e kgx:hasDirectConsolidationParent ?p } }"},
+
+  {"id":"h71","tier":"d","family":"F7","skill":"city-filter",
+   "question":"How many entities are registered in the city of München?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasCity \"München\" }"},
+
+  {"id":"h72","tier":"d","family":"F7","skill":"multi-constraint",
+   "question":"How many entities are classified as funds and have registration status ISSUED?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e a gleif-L1:Fund ; gleif-base:hasRegistrationStatus gleif-L1:ISSUED }"},
+
+  {"id":"h73","tier":"e","family":"F8","skill":"aggregate-top-k",
+   "question":"Which five jurisdictions have the most entities classified as funds? Give the jurisdiction and the count.",
+   "gold":"SELECT ?j (COUNT(?e) AS ?n) WHERE { ?e a gleif-L1:Fund ; gleif-base:hasLegalJurisdiction ?j } GROUP BY ?j ORDER BY DESC(?n) LIMIT 5"},
+
+  {"id":"h74","tier":"e","family":"F8","skill":"aggregate-top-k",
+   "question":"Which three fund managers manage the most funds? Give the manager's legal name and the count.",
+   "gold":"SELECT ?mn (COUNT(?f) AS ?n) WHERE { ?f kgx:hasFundManager ?m . ?m gleif-L1:hasLegalName ?mn } GROUP BY ?mn ORDER BY DESC(?n) LIMIT 3"},
+
+  {"id":"h75","tier":"e","family":"F8","skill":"date-filter",
+   "question":"How many entities were initially registered on or after 1 January 2023?",
+   "gold":"SELECT (COUNT(?e) AS ?n) WHERE { ?e gleif-base:hasInitialRegistrationDate ?d . FILTER(?d >= \"2023-01-01T00:00:00Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) }"},
+
+  {"id":"h76","tier":"e","family":"F8","skill":"distinct-count",
+   "question":"How many distinct jurisdictions appear among all registered entities?",
+   "gold":"SELECT (COUNT(DISTINCT ?j) AS ?n) WHERE { ?e gleif-base:hasLegalJurisdiction ?j }"},
+
+  {"id":"h77","tier":"e","family":"F8","skill":"aggregate-top-k",
+   "question":"Which two reporting exception reasons are the most common? Give the reason and the count.",
+   "gold":"SELECT ?r (COUNT(?x) AS ?n) WHERE { ?x gleif-re:hasExceptionReason ?r } GROUP BY ?r ORDER BY DESC(?n) LIMIT 2"},
+
+  {"id":"h78","tier":"e","family":"F8","skill":"count-subsidiaries",
+   "question":"How many entities does 'Bank of America, National Association' directly consolidate?",
+   "gold":"SELECT (COUNT(DISTINCT ?c) AS ?n) WHERE { ?p gleif-L1:hasLegalName \"Bank of America, National Association\" . ?c kgx:hasDirectConsolidationParent ?p }"},
+
+  {"id":"h79","tier":"e","family":"F8","skill":"count-two-edges",
+   "question":"How many entities report both a direct and an ultimate consolidation parent?",
+   "gold":"SELECT (COUNT(DISTINCT ?c) AS ?n) WHERE { ?c kgx:hasDirectConsolidationParent ?d ; kgx:hasUltimateConsolidationParent ?u }"},
+
+  {"id":"h80","tier":"e","family":"F8","skill":"distinct-count",
+   "question":"How many distinct entities act as a fund manager for at least one fund?",
+   "gold":"SELECT (COUNT(DISTINCT ?m) AS ?n) WHERE { ?f kgx:hasFundManager ?m }"},
+
+  {"id":"h81","tier":"f1","family":"F9","skill":"reason-lookup",
+   "question":"For the entity with LEI 2138009RSH96JD7LVD24, list the distinct reasons it gives for not reporting a consolidation parent.",
+   "gold":"SELECT DISTINCT ?r WHERE { ?e gleif-L1:LEI \"2138009RSH96JD7LVD24\" . ?x gleif-re:hasReportingEntity ?e ; gleif-re:hasExceptionReason ?r }"},
+
+  {"id":"h82","tier":"f1","family":"F9","skill":"looks-unanswerable-but-is",
+   "question":"Does 'DENTONS INVESTMENT SERVICES LIMITED' report a direct consolidation parent? If it reports an exception instead, give the exception category and the reason.",
+   "gold":"SELECT DISTINCT ?cat ?r WHERE { ?e gleif-L1:hasLegalName \"DENTONS INVESTMENT SERVICES LIMITED\" . ?x gleif-re:hasReportingEntity ?e ; gleif-re:hasExceptionReason ?r ; a ?cat . FILTER(?cat != gleif-re:ReportingException) }"},
+
+  {"id":"h83","tier":"f1","family":"F9","skill":"reason-lookup",
+   "question":"For the entity with LEI 254900OFSMY5OM1GUT86, give the distinct exception reasons recorded for it.",
+   "gold":"SELECT DISTINCT ?r WHERE { ?e gleif-L1:LEI \"254900OFSMY5OM1GUT86\" . ?x gleif-re:hasReportingEntity ?e ; gleif-re:hasExceptionReason ?r }"},
+
+  {"id":"h84","tier":"f1","family":"F9","skill":"reason-lookup-name",
+   "question":"What reason does 'Commercial League Sourcing Co. AG' give for not reporting a parent?",
+   "gold":"SELECT DISTINCT ?r WHERE { ?e gleif-L1:hasLegalName \"Commercial League Sourcing Co. AG\" . ?x gleif-re:hasReportingEntity ?e ; gleif-re:hasExceptionReason ?r }"},
+
+  {"id":"h85","tier":"f2","family":"F10","skill":"out-of-scope-employees","expect_empty":true,
+   "question":"What is the total number of employees at 'Allianz SE'?",
+   "gold":"SELECT ?c WHERE { ?e gleif-L1:hasLegalName \"Allianz SE\" ; gleif-base:hasEmployeeCount ?c }"},
+
+  {"id":"h86","tier":"f2","family":"F10","skill":"out-of-scope-ownership","expect_empty":true,
+   "question":"What percentage of 'AMERICAN AXLE & MANUFACTURING, INC.' is owned by 'DAUCH CORPORATION'?",
+   "gold":"SELECT ?pct WHERE { ?e gleif-L1:hasLegalName \"AMERICAN AXLE & MANUFACTURING, INC.\" ; gleif-base:hasOwnershipPercentage ?pct }"},
+
+  {"id":"h87","tier":"f2","family":"F10","skill":"out-of-scope-ticker","expect_empty":true,
+   "question":"What is the stock ticker symbol of 'Siemens Aktiengesellschaft'?",
+   "gold":"SELECT ?t WHERE { ?e gleif-L1:hasLegalName \"Siemens Aktiengesellschaft\" ; gleif-base:hasTickerSymbol ?t }"},
+
+  {"id":"h88","tier":"f2","family":"F10","skill":"out-of-scope-rating","expect_empty":true,
+   "question":"What is the credit rating of 'DEUTSCHE BANK AKTIENGESELLSCHAFT'?",
+   "gold":"SELECT ?r WHERE { ?e gleif-L1:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" ; gleif-base:hasCreditRating ?r }"},
+
+  {"id":"h89","tier":"f3","family":"F11","skill":"nonexistent-lei","expect_empty":true,
+   "question":"What is the legal name of the entity with LEI 00000000000000000000?",
+   "gold":"SELECT ?n WHERE { ?e gleif-L1:LEI \"00000000000000000000\" ; gleif-L1:hasLegalName ?n }"},
+
+  {"id":"h90","tier":"f3","family":"F11","skill":"nonexistent-name","expect_empty":true,
+   "question":"What is the LEI of the entity whose legal name is exactly 'Totally Nonexistent Holdings XYZ Ltd'?",
+   "gold":"SELECT ?lei WHERE { ?e gleif-L1:hasLegalName \"Totally Nonexistent Holdings XYZ Ltd\" ; gleif-L1:LEI ?lei }"}
+]

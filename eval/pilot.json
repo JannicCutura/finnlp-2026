@@ -1,0 +1,31 @@
+[
+  {"id": "p01", "tier": "a  lookup",
+   "question": "What is the legal name of the entity with LEI 001GPB6A9XPE8XJICC14?"},
+
+  {"id": "p02", "tier": "b  single-hop",
+   "question": "Which entity is the direct accounting consolidation parent of the entity with LEI 5493002WI30SR6SIUH74? Give its legal name."},
+
+  {"id": "p03", "tier": "b  single-hop",
+   "question": "Which entity manages the fund whose legal name is 'VDDKO - MASTERFONDS'? Give the manager's legal name."},
+
+  {"id": "p04", "tier": "c  multi-hop",
+   "question": "List the legal names of all consolidation ancestors of the entity with LEI 5493002WI30SR6SIUH74, following direct consolidation parents transitively."},
+
+  {"id": "p05", "tier": "c  multi-hop",
+   "question": "For the sub-fund named 'Euro Income Fixed Maturity Bond Fund 2030', which entity manages its umbrella fund? Give that manager's legal name."},
+
+  {"id": "p06", "tier": "d  filter",
+   "question": "How many entities with registration status ISSUED are registered in the jurisdiction Germany?"},
+
+  {"id": "p07", "tier": "e  aggregate",
+   "question": "Which five jurisdictions have the most ISSUED entities? Return the jurisdiction and the count."},
+
+  {"id": "p08", "tier": "f1 abstain",
+   "question": "Does the entity named 'SERRA ENERGY METALS CORP.' report a direct consolidation parent? If it reports an exception instead, give the exception reason."},
+
+  {"id": "p09", "tier": "f2 abstain",
+   "question": "What percentage of the shares of the entity with LEI 5493002WI30SR6SIUH74 is owned by its parent?"},
+
+  {"id": "p10", "tier": "f3 abstain",
+   "question": "What is the legal name of the entity with LEI ZZZZNOTAREALLEI00000?"}
+]

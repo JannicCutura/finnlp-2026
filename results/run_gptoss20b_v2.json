@@ -1,0 +1,2992 @@
+[
+  {
+    "question": "What is the legal name of the entity with LEI 001GPB6A9XPE8XJICC14?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?name WHERE {\n  lei:001GPB6A9XPE8XJICC14 gleif-L1:LEI \"001GPB6A9XPE8XJICC14\" .\n  lei:001GPB6A9XPE8XJICC14 gleif-L1:hasLegalName ?name .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 16.67,
+        "usage": {
+          "prompt_tokens": 3224,
+          "completion_tokens": 219,
+          "total_tokens": 3443
+        },
+        "status": "ok",
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Fidelity Advisor Leveraged Company Stock Fund"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.002
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?name WHERE {\n  lei:001GPB6A9XPE8XJICC14 gleif-L1:LEI \"001GPB6A9XPE8XJICC14\" .\n  lei:001GPB6A9XPE8XJICC14 gleif-L1:hasLegalName ?name .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Fidelity Advisor Leveraged Company Stock Fund"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "name"
+    ],
+    "total_gen_seconds": 16.67,
+    "id": "a01",
+    "tier": "a"
+  },
+  {
+    "question": "What is the LEI of Siemens Aktiengesellschaft?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?lei WHERE {\n  ?e gleif-L1:hasLegalName \"Siemens Aktiengesellschaft\" .\n  ?e gleif-L1:LEI ?lei .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.23,
+        "usage": {
+          "prompt_tokens": 3208,
+          "completion_tokens": 157,
+          "total_tokens": 3365
+        },
+        "status": "ok",
+        "columns": [
+          "lei"
+        ],
+        "rows": [
+          [
+            "W38RGI023J3WT1HWRP32"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.002
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?lei WHERE {\n  ?e gleif-L1:hasLegalName \"Siemens Aktiengesellschaft\" .\n  ?e gleif-L1:LEI ?lei .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "W38RGI023J3WT1HWRP32"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "lei"
+    ],
+    "total_gen_seconds": 12.23,
+    "id": "a02",
+    "tier": "a"
+  },
+  {
+    "question": "In which jurisdiction is DEUTSCHE BANK AKTIENGESELLSCHAFT incorporated?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT ?jurisdiction WHERE {\n  ?e gleif-base:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" ;\n     gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+        "guard": "unknown vocabulary: gleif-base:hasLegalName",
+        "guard_kind": "vocabulary",
+        "gen_seconds": 13.23,
+        "usage": {
+          "prompt_tokens": 3216,
+          "completion_tokens": 168,
+          "total_tokens": 3384
+        },
+        "status": "guard_failed",
+        "rows": [],
+        "row_count": 0
+      },
+      {
+        "attempt": 2,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT ?jurisdiction WHERE {\n  ?e gleif-L1:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" ;\n     gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.04,
+        "usage": {
+          "prompt_tokens": 3398,
+          "completion_tokens": 124,
+          "total_tokens": 3522
+        },
+        "status": "ok",
+        "columns": [
+          "jurisdiction"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/data/jurisdiction/DE"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.002
+      }
+    ],
+    "n_attempts": 2,
+    "first_time_ok": false,
+    "repaired": true,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT ?jurisdiction WHERE {\n  ?e gleif-L1:hasLegalName \"DEUTSCHE BANK AKTIENGESELLSCHAFT\" ;\n     gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/data/jurisdiction/DE"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "jurisdiction"
+    ],
+    "total_gen_seconds": 25.27,
+    "id": "a03",
+    "tier": "a"
+  },
+  {
+    "question": "What is the legal form of Allianz SE? Give the legal form name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX elf: <https://www.gleif.org/data/elf/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT ?formName WHERE {\n  ?e gleif-L1:hasLegalName \"Allianz SE\" .\n  ?e gleif-L1:hasLegalForm ?lf .\n  ?lf rdfs:label ?formName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 15.7,
+        "usage": {
+          "prompt_tokens": 3213,
+          "completion_tokens": 208,
+          "total_tokens": 3421
+        },
+        "status": "ok",
+        "columns": [
+          "formName"
+        ],
+        "rows": [
+          [
+            "Europäische Aktiengesellschaft"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.003
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX elf: <https://www.gleif.org/data/elf/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT ?formName WHERE {\n  ?e gleif-L1:hasLegalName \"Allianz SE\" .\n  ?e gleif-L1:hasLegalForm ?lf .\n  ?lf rdfs:label ?formName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Europäische Aktiengesellschaft"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "formName"
+    ],
+    "total_gen_seconds": 15.7,
+    "id": "a04",
+    "tier": "a"
+  },
+  {
+    "question": "What is the registration status of the entity with LEI 2138009RSH96JD7LVD24?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?status WHERE {\n  lei:2138009RSH96JD7LVD24 gleif-base:hasRegistrationStatus ?status .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 9.72,
+        "usage": {
+          "prompt_tokens": 3222,
+          "completion_tokens": 113,
+          "total_tokens": 3335
+        },
+        "status": "ok",
+        "columns": [
+          "status"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/ontology/L1/LAPSED"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?status WHERE {\n  lei:2138009RSH96JD7LVD24 gleif-base:hasRegistrationStatus ?status .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/ontology/L1/LAPSED"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "status"
+    ],
+    "total_gen_seconds": 9.72,
+    "id": "a05",
+    "tier": "a"
+  },
+  {
+    "question": "In which city is the legal address of Bank of America, National Association?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\n\nSELECT ?city WHERE {\n  ?e a gleif-base:Entity ;\n     gleif-L1:hasLegalName \"Bank of America, National Association\" ;\n     gleif-base:hasCity ?city .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 10.71,
+        "usage": {
+          "prompt_tokens": 3213,
+          "completion_tokens": 130,
+          "total_tokens": 3343
+        },
+        "status": "ok",
+        "columns": [
+          "city"
+        ],
+        "rows": [
+          [
+            "Charlotte"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 11.39
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\n\nSELECT ?city WHERE {\n  ?e a gleif-base:Entity ;\n     gleif-L1:hasLegalName \"Bank of America, National Association\" ;\n     gleif-base:hasCity ?city .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Charlotte"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "city"
+    ],
+    "total_gen_seconds": 10.71,
+    "id": "a06",
+    "tier": "a"
+  },
+  {
+    "question": "What is the legal name of the entity with LEI DQ2T0MMUTO0IPF9G9Z35?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?legalName WHERE {\n  lei:DQ2T0MMUTO0IPF9G9Z35 gleif-L1:hasLegalName ?legalName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.03,
+        "usage": {
+          "prompt_tokens": 3225,
+          "completion_tokens": 145,
+          "total_tokens": 3370
+        },
+        "status": "ok",
+        "columns": [
+          "legalName"
+        ],
+        "rows": [
+          [
+            "AMUNDI ASSET MANAGEMENT"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.002
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?legalName WHERE {\n  lei:DQ2T0MMUTO0IPF9G9Z35 gleif-L1:hasLegalName ?legalName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "AMUNDI ASSET MANAGEMENT"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "legalName"
+    ],
+    "total_gen_seconds": 12.03,
+    "id": "a07",
+    "tier": "a"
+  },
+  {
+    "question": "What is the LEI of the entity named 'OMNICOM GROUP INC.'?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nSELECT ?lei WHERE {\n  ?e gleif-L1:hasLegalName \"OMNICOM GROUP INC.\" ;\n     gleif-L1:LEI ?lei .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.97,
+        "usage": {
+          "prompt_tokens": 3215,
+          "completion_tokens": 165,
+          "total_tokens": 3380
+        },
+        "status": "ok",
+        "columns": [
+          "lei"
+        ],
+        "rows": [
+          [
+            "HKUPACFHSSASQK8HLS17"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nSELECT ?lei WHERE {\n  ?e gleif-L1:hasLegalName \"OMNICOM GROUP INC.\" ;\n     gleif-L1:LEI ?lei .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "HKUPACFHSSASQK8HLS17"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "lei"
+    ],
+    "total_gen_seconds": 12.97,
+    "id": "a08",
+    "tier": "a"
+  },
+  {
+    "question": "What is the jurisdiction and the registration status of the entity with LEI 549300XJR7SAHFCXCM16?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?jurisdiction ?registrationStatus WHERE {\n  lei:549300XJR7SAHFCXCM16\n    gleif-base:hasLegalJurisdiction ?jurisdiction ;\n    gleif-base:hasRegistrationStatus ?registrationStatus .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.2,
+        "usage": {
+          "prompt_tokens": 3225,
+          "completion_tokens": 151,
+          "total_tokens": 3376
+        },
+        "status": "ok",
+        "columns": [
+          "jurisdiction",
+          "registrationStatus"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/data/jurisdiction/US-IL",
+            "https://www.gleif.org/ontology/L1/LAPSED"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?jurisdiction ?registrationStatus WHERE {\n  lei:549300XJR7SAHFCXCM16\n    gleif-base:hasLegalJurisdiction ?jurisdiction ;\n    gleif-base:hasRegistrationStatus ?registrationStatus .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/data/jurisdiction/US-IL",
+        "https://www.gleif.org/ontology/L1/LAPSED"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "jurisdiction",
+      "registrationStatus"
+    ],
+    "total_gen_seconds": 12.2,
+    "id": "a09",
+    "tier": "a"
+  },
+  {
+    "question": "What is the legal form name of the entity with LEI 7LTWFZYICNSX8D621K86?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX elf: <https://www.gleif.org/data/elf/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?legalFormName WHERE {\n  lei:7LTWFZYICNSX8D621K86 gleif-L1:hasLegalForm ?lf .\n  ?lf rdfs:label ?legalFormName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 13.57,
+        "usage": {
+          "prompt_tokens": 3224,
+          "completion_tokens": 172,
+          "total_tokens": 3396
+        },
+        "status": "ok",
+        "columns": [
+          "legalFormName"
+        ],
+        "rows": [
+          [
+            "Aktiengesellschaft"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX elf: <https://www.gleif.org/data/elf/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?legalFormName WHERE {\n  lei:7LTWFZYICNSX8D621K86 gleif-L1:hasLegalForm ?lf .\n  ?lf rdfs:label ?legalFormName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Aktiengesellschaft"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "legalFormName"
+    ],
+    "total_gen_seconds": 13.57,
+    "id": "a10",
+    "tier": "a"
+  },
+  {
+    "question": "Which entity is the direct accounting consolidation parent of the entity with LEI 5493002WI30SR6SIUH74? Give its legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?parentLegalName WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasDirectConsolidationParent ?parent .\n  ?parent gleif-L1:hasLegalName ?parentLegalName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 14.45,
+        "usage": {
+          "prompt_tokens": 3229,
+          "completion_tokens": 174,
+          "total_tokens": 3403
+        },
+        "status": "ok",
+        "columns": [
+          "parentLegalName"
+        ],
+        "rows": [
+          [
+            "DIGIPLEX NORWAY HOLDING 2 AS"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?parentLegalName WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasDirectConsolidationParent ?parent .\n  ?parent gleif-L1:hasLegalName ?parentLegalName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "DIGIPLEX NORWAY HOLDING 2 AS"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "parentLegalName"
+    ],
+    "total_gen_seconds": 14.45,
+    "id": "b01",
+    "tier": "b"
+  },
+  {
+    "question": "Who is the ultimate accounting consolidation parent of the entity with LEI 5493002WI30SR6SIUH74? Give its legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?parentName WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasUltimateConsolidationParent ?parent .\n  ?parent gleif-L1:hasLegalName ?parentName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 20.22,
+        "usage": {
+          "prompt_tokens": 3228,
+          "completion_tokens": 261,
+          "total_tokens": 3489
+        },
+        "status": "ok",
+        "columns": [
+          "parentName"
+        ],
+        "rows": [
+          [
+            "SI NOR HOLDING 1 AS"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?parentName WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasUltimateConsolidationParent ?parent .\n  ?parent gleif-L1:hasLegalName ?parentName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "SI NOR HOLDING 1 AS"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "parentName"
+    ],
+    "total_gen_seconds": 20.22,
+    "id": "b02",
+    "tier": "b"
+  },
+  {
+    "question": "Which entity manages the fund whose legal name is 'VDDKO - MASTERFONDS'? Give the manager's legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?fund a gleif-L1:Fund ;\n        gleif-L1:hasLegalName \"VDDKO - MASTERFONDS\" .\n  ?fund kgx:hasFundManager ?mgr .\n  ?mgr gleif-L1:hasLegalName ?managerName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 16.96,
+        "usage": {
+          "prompt_tokens": 3223,
+          "completion_tokens": 219,
+          "total_tokens": 3442
+        },
+        "status": "ok",
+        "columns": [
+          "managerName"
+        ],
+        "rows": [
+          [
+            "UI BVK Kapitalverwaltungsgesellschaft mbH"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 2.206
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?fund a gleif-L1:Fund ;\n        gleif-L1:hasLegalName \"VDDKO - MASTERFONDS\" .\n  ?fund kgx:hasFundManager ?mgr .\n  ?mgr gleif-L1:hasLegalName ?managerName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "UI BVK Kapitalverwaltungsgesellschaft mbH"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "managerName"
+    ],
+    "total_gen_seconds": 16.96,
+    "id": "b03",
+    "tier": "b"
+  },
+  {
+    "question": "Which umbrella fund does the sub-fund 'NT Global Green Bond Index Fund' belong to? Give its legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?umbrellaName WHERE {\n  ?subfund gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella gleif-L1:hasLegalName ?umbrellaName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 16.97,
+        "usage": {
+          "prompt_tokens": 3222,
+          "completion_tokens": 221,
+          "total_tokens": 3443
+        },
+        "status": "ok",
+        "columns": [
+          "umbrellaName"
+        ],
+        "rows": [
+          [
+            "Northern Trust Investment Funds plc"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?umbrellaName WHERE {\n  ?subfund gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella gleif-L1:hasLegalName ?umbrellaName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Northern Trust Investment Funds plc"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "umbrellaName"
+    ],
+    "total_gen_seconds": 16.97,
+    "id": "b04",
+    "tier": "b"
+  },
+  {
+    "question": "Which master fund does 'BREVAN HOWARD MACRO OPPORTUNITIES FUND LIMITED' feed into? Give its legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?masterName WHERE {\n  ?child a gleif-L1:RegisteredEntity ;\n         gleif-L1:hasLegalName \"BREVAN HOWARD MACRO OPPORTUNITIES FUND LIMITED\" .\n  ?child kgx:hasMasterFund ?master .\n  ?master gleif-L1:hasLegalName ?masterName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 17.23,
+        "usage": {
+          "prompt_tokens": 3225,
+          "completion_tokens": 214,
+          "total_tokens": 3439
+        },
+        "status": "ok",
+        "columns": [
+          "masterName"
+        ],
+        "rows": [
+          [
+            "BREVAN HOWARD MACRO OPPORTUNITIES MASTER FUND LIMITED"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 19.048
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?masterName WHERE {\n  ?child a gleif-L1:RegisteredEntity ;\n         gleif-L1:hasLegalName \"BREVAN HOWARD MACRO OPPORTUNITIES FUND LIMITED\" .\n  ?child kgx:hasMasterFund ?master .\n  ?master gleif-L1:hasLegalName ?masterName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "BREVAN HOWARD MACRO OPPORTUNITIES MASTER FUND LIMITED"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "masterName"
+    ],
+    "total_gen_seconds": 17.23,
+    "id": "b05",
+    "tier": "b"
+  },
+  {
+    "question": "Which entity is the head office of the branch named 'Caldic Hongkong Limited'? Give its legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?headOfficeName WHERE {\n  ?branch gleif-L1:hasLegalName \"Caldic Hongkong Limited\" .\n  ?branch kgx:hasBranchParent ?headOffice .\n  ?headOffice gleif-L1:hasLegalName ?headOfficeName .\n} LIMIT 1",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 16.45,
+        "usage": {
+          "prompt_tokens": 3221,
+          "completion_tokens": 208,
+          "total_tokens": 3429
+        },
+        "status": "ok",
+        "columns": [
+          "headOfficeName"
+        ],
+        "rows": [
+          [
+            "Caldic B.V."
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?headOfficeName WHERE {\n  ?branch gleif-L1:hasLegalName \"Caldic Hongkong Limited\" .\n  ?branch kgx:hasBranchParent ?headOffice .\n  ?headOffice gleif-L1:hasLegalName ?headOfficeName .\n} LIMIT 1",
+    "guard": "ok",
+    "rows": [
+      [
+        "Caldic B.V."
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "headOfficeName"
+    ],
+    "total_gen_seconds": 16.45,
+    "id": "b06",
+    "tier": "b"
+  },
+  {
+    "question": "Which branches does 'Caldic B.V.' have? Give their legal names.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?branchLegalName WHERE {\n  # Find the entity with legal name \"Caldic B.V.\"\n  ?headOffice a gleif-L1:RegisteredEntity ;\n              gleif-L1:hasLegalName \"Caldic B.V.\" .\n\n  # Find branches whose parent is this head office\n  ?branch kgx:hasBranchParent ?headOffice ;\n          gleif-L1:hasLegalName ?branchLegalName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 18.72,
+        "usage": {
+          "prompt_tokens": 3215,
+          "completion_tokens": 244,
+          "total_tokens": 3459
+        },
+        "status": "ok",
+        "columns": [
+          "branchLegalName"
+        ],
+        "rows": [
+          [
+            "Caldic Hongkong Limited"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 12.066
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?branchLegalName WHERE {\n  # Find the entity with legal name \"Caldic B.V.\"\n  ?headOffice a gleif-L1:RegisteredEntity ;\n              gleif-L1:hasLegalName \"Caldic B.V.\" .\n\n  # Find branches whose parent is this head office\n  ?branch kgx:hasBranchParent ?headOffice ;\n          gleif-L1:hasLegalName ?branchLegalName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Caldic Hongkong Limited"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "branchLegalName"
+    ],
+    "total_gen_seconds": 18.72,
+    "id": "b07",
+    "tier": "b"
+  },
+  {
+    "question": "Which funds does 'ACM Forvaltning A/S' manage? Give their legal names.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?name WHERE {\n  ?manager gleif-L1:hasLegalName \"ACM Forvaltning A/S\" .\n  ?fund kgx:hasFundManager ?manager ;\n        gleif-L1:hasLegalName ?name .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 17.61,
+        "usage": {
+          "prompt_tokens": 3217,
+          "completion_tokens": 231,
+          "total_tokens": 3448
+        },
+        "status": "ok",
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Accunia Private Placements"
+          ],
+          [
+            "European CLO Investment Grade KL"
+          ],
+          [
+            "Absolute Return Akk (KL)"
+          ],
+          [
+            "Credit Index Main III"
+          ],
+          [
+            "High Dividend IV"
+          ],
+          [
+            "Stable Income V"
+          ],
+          [
+            "Marble Bridge"
+          ],
+          [
+            "Regnegade Funding I (KL)"
+          ],
+          [
+            "AIF-værdipapirfonden Accunia Invest"
+          ],
+          [
+            "Credit Index Main 2027 (KL)"
+          ],
+          [
+            "High Dividend 2029 Plus (KL)"
+          ],
+          [
+            "European CLO AAA/AA Akk (KL)"
+          ],
+          [
+            "Credit Index Strategies 2031 AKK"
+          ],
+          [
+            "Dynamic Credit Strategies Akk (KL)"
+          ],
+          [
+            "ACM Hybrid AKK (KL)"
+          ],
+          [
+            "High Dividend 2031 Plus (KL)"
+          ],
+          [
+            "High Dividend 2030 Plus (KL)"
+          ],
+          [
+            "Accunia Regulatory Capital"
+          ],
+          [
+            "European Credit Portfolio"
+          ],
+          [
+            "AIF-Værdipapirfonden New Harbour Dislocated Credit Indices (KL)"
+          ],
+          [
+            "AIF-værdipapirfonden New Harbour - Credit Index Strategies III"
+          ],
+          [
+            "Credit Index Main II"
+          ],
+          [
+            "Kapitalforeningen Accunia Invest"
+          ],
+          [
+            "AIF-værdipapirfonden New Harbour - Credit Index Strategies IV"
+          ],
+          [
+            "Credit Index Strategies 2029 AKK (KL)"
+          ],
+          [
+            "King's Garden AKK (KL)"
+          ],
+          [
+            "EUROPEAN HIGH YIELD (KL)"
+          ],
+          [
+            "AIF-værdipapirfonden New Harbour"
+          ],
+          [
+            "Stable Income 2029 Plus (KL)"
+          ],
+          [
+            "European CLO Opportunity DKK"
+          ],
+          [
+            "European CLO Opportunity KL"
+          ],
+          [
+            "AIF-værdipapirfonden New Harbour CLO Market Dislocation (KL)"
+          ],
+          [
+            "Stable Income 2028 Plus (KL)"
+          ],
+          [
+            "US CLO Investment Grade (KL)"
+          ]
+        ],
+        "row_count": 34,
+        "exec_seconds": 0.006
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?name WHERE {\n  ?manager gleif-L1:hasLegalName \"ACM Forvaltning A/S\" .\n  ?fund kgx:hasFundManager ?manager ;\n        gleif-L1:hasLegalName ?name .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Accunia Private Placements"
+      ],
+      [
+        "European CLO Investment Grade KL"
+      ],
+      [
+        "Absolute Return Akk (KL)"
+      ],
+      [
+        "Credit Index Main III"
+      ],
+      [
+        "High Dividend IV"
+      ],
+      [
+        "Stable Income V"
+      ],
+      [
+        "Marble Bridge"
+      ],
+      [
+        "Regnegade Funding I (KL)"
+      ],
+      [
+        "AIF-værdipapirfonden Accunia Invest"
+      ],
+      [
+        "Credit Index Main 2027 (KL)"
+      ],
+      [
+        "High Dividend 2029 Plus (KL)"
+      ],
+      [
+        "European CLO AAA/AA Akk (KL)"
+      ],
+      [
+        "Credit Index Strategies 2031 AKK"
+      ],
+      [
+        "Dynamic Credit Strategies Akk (KL)"
+      ],
+      [
+        "ACM Hybrid AKK (KL)"
+      ],
+      [
+        "High Dividend 2031 Plus (KL)"
+      ],
+      [
+        "High Dividend 2030 Plus (KL)"
+      ],
+      [
+        "Accunia Regulatory Capital"
+      ],
+      [
+        "European Credit Portfolio"
+      ],
+      [
+        "AIF-Værdipapirfonden New Harbour Dislocated Credit Indices (KL)"
+      ],
+      [
+        "AIF-værdipapirfonden New Harbour - Credit Index Strategies III"
+      ],
+      [
+        "Credit Index Main II"
+      ],
+      [
+        "Kapitalforeningen Accunia Invest"
+      ],
+      [
+        "AIF-værdipapirfonden New Harbour - Credit Index Strategies IV"
+      ],
+      [
+        "Credit Index Strategies 2029 AKK (KL)"
+      ],
+      [
+        "King's Garden AKK (KL)"
+      ],
+      [
+        "EUROPEAN HIGH YIELD (KL)"
+      ],
+      [
+        "AIF-værdipapirfonden New Harbour"
+      ],
+      [
+        "Stable Income 2029 Plus (KL)"
+      ],
+      [
+        "European CLO Opportunity DKK"
+      ],
+      [
+        "European CLO Opportunity KL"
+      ],
+      [
+        "AIF-værdipapirfonden New Harbour CLO Market Dislocation (KL)"
+      ],
+      [
+        "Stable Income 2028 Plus (KL)"
+      ],
+      [
+        "US CLO Investment Grade (KL)"
+      ]
+    ],
+    "row_count": 34,
+    "columns": [
+      "name"
+    ],
+    "total_gen_seconds": 17.61,
+    "id": "b08",
+    "tier": "b"
+  },
+  {
+    "question": "Who is the direct consolidation parent of 'CITIBANK DISTRIBUIDORA DE TITULOS E VALORES MOB SA'? Give the legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?parentName WHERE {\n  ?child a gleif-L1:RegisteredEntity ;\n         gleif-L1:hasLegalName \"CITIBANK DISTRIBUIDORA DE TITULOS E VALORES MOB SA\" .\n  ?child kgx:hasDirectConsolidationParent ?parent .\n  ?parent gleif-L1:hasLegalName ?parentName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 16.87,
+        "usage": {
+          "prompt_tokens": 3229,
+          "completion_tokens": 211,
+          "total_tokens": 3440
+        },
+        "status": "ok",
+        "columns": [
+          "parentName"
+        ],
+        "rows": [
+          [
+            "BANCO CITIBANK S A"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 18.868
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?parentName WHERE {\n  ?child a gleif-L1:RegisteredEntity ;\n         gleif-L1:hasLegalName \"CITIBANK DISTRIBUIDORA DE TITULOS E VALORES MOB SA\" .\n  ?child kgx:hasDirectConsolidationParent ?parent .\n  ?parent gleif-L1:hasLegalName ?parentName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "BANCO CITIBANK S A"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "parentName"
+    ],
+    "total_gen_seconds": 16.87,
+    "id": "b09",
+    "tier": "b"
+  },
+  {
+    "question": "Which entity manages the fund with LEI 001GPB6A9XPE8XJICC14? Give the manager's legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?managerName WHERE {\n  lei:001GPB6A9XPE8XJICC14 kgx:hasFundManager ?mgr .\n  ?mgr gleif-L1:hasLegalName ?managerName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 14.89,
+        "usage": {
+          "prompt_tokens": 3228,
+          "completion_tokens": 183,
+          "total_tokens": 3411
+        },
+        "status": "ok",
+        "columns": [
+          "managerName"
+        ],
+        "rows": [
+          [
+            "FIDELITY MANAGEMENT & RESEARCH COMPANY LLC"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?managerName WHERE {\n  lei:001GPB6A9XPE8XJICC14 kgx:hasFundManager ?mgr .\n  ?mgr gleif-L1:hasLegalName ?managerName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "FIDELITY MANAGEMENT & RESEARCH COMPANY LLC"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "managerName"
+    ],
+    "total_gen_seconds": 14.89,
+    "id": "b10",
+    "tier": "b"
+  },
+  {
+    "question": "List the legal names of all consolidation ancestors of the entity with LEI 5493002WI30SR6SIUH74, following direct consolidation parents transitively.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT DISTINCT ?name WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?name .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 14.37,
+        "usage": {
+          "prompt_tokens": 3231,
+          "completion_tokens": 174,
+          "total_tokens": 3405
+        },
+        "status": "ok",
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "DIGIPLEX NORWAY HOLDING 2 AS"
+          ],
+          [
+            "SI NOR HOLDING 1 AS"
+          ]
+        ],
+        "row_count": 2,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT DISTINCT ?name WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?name .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "DIGIPLEX NORWAY HOLDING 2 AS"
+      ],
+      [
+        "SI NOR HOLDING 1 AS"
+      ]
+    ],
+    "row_count": 2,
+    "columns": [
+      "name"
+    ],
+    "total_gen_seconds": 14.37,
+    "id": "c01",
+    "tier": "c"
+  },
+  {
+    "question": "For the sub-fund named 'NT Global Green Bond Index Fund', which entity manages its umbrella fund? Give that manager's legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?subfund a gleif-L1:Fund ;\n           gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-base:hasLegalName ?managerName .\n}",
+        "guard": "unknown vocabulary: gleif-base:hasLegalName",
+        "guard_kind": "vocabulary",
+        "gen_seconds": 21.57,
+        "usage": {
+          "prompt_tokens": 3226,
+          "completion_tokens": 291,
+          "total_tokens": 3517
+        },
+        "status": "guard_failed",
+        "rows": [],
+        "row_count": 0
+      },
+      {
+        "attempt": 2,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?subfund a gleif-L1:Fund ;\n           gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?managerName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 13.85,
+        "usage": {
+          "prompt_tokens": 3447,
+          "completion_tokens": 149,
+          "total_tokens": 3596
+        },
+        "status": "ok",
+        "columns": [
+          "managerName"
+        ],
+        "rows": [
+          [
+            "Northern Trust Fund Managers (Ireland) Limited"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 1.457
+      }
+    ],
+    "n_attempts": 2,
+    "first_time_ok": false,
+    "repaired": true,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?subfund a gleif-L1:Fund ;\n           gleif-L1:hasLegalName \"NT Global Green Bond Index Fund\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?managerName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "Northern Trust Fund Managers (Ireland) Limited"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "managerName"
+    ],
+    "total_gen_seconds": 35.43,
+    "id": "c02",
+    "tier": "c"
+  },
+  {
+    "question": "List the legal names of all consolidation ancestors of the entity with LEI 549300QAYFK0267GSJ26.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT DISTINCT ?legalName WHERE {\n  lei:549300QAYFK0267GSJ26 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?legalName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 15.16,
+        "usage": {
+          "prompt_tokens": 3224,
+          "completion_tokens": 194,
+          "total_tokens": 3418
+        },
+        "status": "ok",
+        "columns": [
+          "legalName"
+        ],
+        "rows": [
+          [
+            "STANDARD CHARTERED HOLDINGS (INTERNATIONAL) B.V."
+          ],
+          [
+            "STANDARD CHARTERED BANK"
+          ],
+          [
+            "STANDARD CHARTERED MB HOLDINGS B.V."
+          ],
+          [
+            "渣打直接投資有限公司"
+          ],
+          [
+            "STANDARD CHARTERED HOLDINGS LIMITED"
+          ],
+          [
+            "渣打(亞洲)有限公司"
+          ],
+          [
+            "STANDARD CHARTERED PLC"
+          ],
+          [
+            "SCMB OVERSEAS LIMITED"
+          ],
+          [
+            "STANDARD CHARTERED PRIVATE EQUITY (MAURITIUS) III LIMITED"
+          ]
+        ],
+        "row_count": 9,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT DISTINCT ?legalName WHERE {\n  lei:549300QAYFK0267GSJ26 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?legalName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "STANDARD CHARTERED HOLDINGS (INTERNATIONAL) B.V."
+      ],
+      [
+        "STANDARD CHARTERED BANK"
+      ],
+      [
+        "STANDARD CHARTERED MB HOLDINGS B.V."
+      ],
+      [
+        "渣打直接投資有限公司"
+      ],
+      [
+        "STANDARD CHARTERED HOLDINGS LIMITED"
+      ],
+      [
+        "渣打(亞洲)有限公司"
+      ],
+      [
+        "STANDARD CHARTERED PLC"
+      ],
+      [
+        "SCMB OVERSEAS LIMITED"
+      ],
+      [
+        "STANDARD CHARTERED PRIVATE EQUITY (MAURITIUS) III LIMITED"
+      ]
+    ],
+    "row_count": 9,
+    "columns": [
+      "legalName"
+    ],
+    "total_gen_seconds": 15.16,
+    "id": "c03",
+    "tier": "c"
+  },
+  {
+    "question": "How many consolidation ancestors does the entity with LEI 549300L2J7A36CA16L31 have, following direct parents transitively?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT (COUNT(DISTINCT ?ancestor) AS ?numAncestors)\nWHERE {\n  lei:549300L2J7A36CA16L31 kgx:hasDirectConsolidationParent+ ?ancestor .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 13.07,
+        "usage": {
+          "prompt_tokens": 3229,
+          "completion_tokens": 153,
+          "total_tokens": 3382
+        },
+        "status": "ok",
+        "columns": [
+          "numAncestors"
+        ],
+        "rows": [
+          [
+            "9"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT (COUNT(DISTINCT ?ancestor) AS ?numAncestors)\nWHERE {\n  lei:549300L2J7A36CA16L31 kgx:hasDirectConsolidationParent+ ?ancestor .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "9"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "numAncestors"
+    ],
+    "total_gen_seconds": 13.07,
+    "id": "c04",
+    "tier": "c"
+  },
+  {
+    "question": "For the sub-fund 'AMBIENTA X ALPHA PLUS FUND', which entity manages its umbrella fund? Give that manager's legal name.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?subfund gleif-L1:hasLegalName \"AMBIENTA X ALPHA PLUS FUND\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?managerName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 19.11,
+        "usage": {
+          "prompt_tokens": 3227,
+          "completion_tokens": 249,
+          "total_tokens": 3476
+        },
+        "status": "ok",
+        "columns": [
+          "managerName"
+        ],
+        "rows": [
+          [
+            "AMBIENTA SOCIETA' DI GESTIONE DEL RISPARMIO SOCIETA' PER AZIONI"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerName WHERE {\n  ?subfund gleif-L1:hasLegalName \"AMBIENTA X ALPHA PLUS FUND\" .\n  ?subfund kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?managerName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "AMBIENTA SOCIETA' DI GESTIONE DEL RISPARMIO SOCIETA' PER AZIONI"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "managerName"
+    ],
+    "total_gen_seconds": 19.11,
+    "id": "c05",
+    "tier": "c"
+  },
+  {
+    "question": "List the legal names of all consolidation ancestors of the entity with LEI 549300K4B04A7LZKOB78.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT DISTINCT ?ancestorName WHERE {\n  lei:549300K4B04A7LZKOB78 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?ancestorName .\n}",
+        "guard": "Exception: Unknown namespace prefix : lei",
+        "guard_kind": "syntax",
+        "gen_seconds": 10.78,
+        "usage": {
+          "prompt_tokens": 3227,
+          "completion_tokens": 120,
+          "total_tokens": 3347
+        },
+        "status": "guard_failed",
+        "rows": [],
+        "row_count": 0
+      },
+      {
+        "attempt": 2,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT DISTINCT ?ancestorName WHERE {\n  lei:549300K4B04A7LZKOB78 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?ancestorName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 11.97,
+        "usage": {
+          "prompt_tokens": 3358,
+          "completion_tokens": 124,
+          "total_tokens": 3482
+        },
+        "status": "ok",
+        "columns": [
+          "ancestorName"
+        ],
+        "rows": [
+          [
+            "CITIBANK OVERSEAS INVESTMENT CORPORATION"
+          ],
+          [
+            "CITICORP LLC"
+          ],
+          [
+            "LATIN AMERICAN INVESTMENT BANK BAHAMAS LIMITED"
+          ],
+          [
+            "Citibank, National Association"
+          ],
+          [
+            "Citibank Brazilian Annex VI Trust"
+          ],
+          [
+            "CJP HOLDINGS LLC"
+          ],
+          [
+            "CITIGROUP INC."
+          ],
+          [
+            "CANARY FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR"
+          ],
+          [
+            "YONDER INVESTMENT CORPORATION"
+          ]
+        ],
+        "row_count": 9,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 2,
+    "first_time_ok": false,
+    "repaired": true,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT DISTINCT ?ancestorName WHERE {\n  lei:549300K4B04A7LZKOB78 kgx:hasDirectConsolidationParent+ ?ancestor .\n  ?ancestor gleif-L1:hasLegalName ?ancestorName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "CITIBANK OVERSEAS INVESTMENT CORPORATION"
+      ],
+      [
+        "CITICORP LLC"
+      ],
+      [
+        "LATIN AMERICAN INVESTMENT BANK BAHAMAS LIMITED"
+      ],
+      [
+        "Citibank, National Association"
+      ],
+      [
+        "Citibank Brazilian Annex VI Trust"
+      ],
+      [
+        "CJP HOLDINGS LLC"
+      ],
+      [
+        "CITIGROUP INC."
+      ],
+      [
+        "CANARY FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR"
+      ],
+      [
+        "YONDER INVESTMENT CORPORATION"
+      ]
+    ],
+    "row_count": 9,
+    "columns": [
+      "ancestorName"
+    ],
+    "total_gen_seconds": 22.75,
+    "id": "c06",
+    "tier": "c"
+  },
+  {
+    "question": "Which jurisdiction is the ultimate consolidation parent of the entity with LEI 5493002WI30SR6SIUH74 incorporated in?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?jurisdiction WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasUltimateConsolidationParent ?parent .\n  ?parent gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 14.06,
+        "usage": {
+          "prompt_tokens": 3225,
+          "completion_tokens": 177,
+          "total_tokens": 3402
+        },
+        "status": "ok",
+        "columns": [
+          "jurisdiction"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/data/jurisdiction/NO"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?jurisdiction WHERE {\n  lei:5493002WI30SR6SIUH74 kgx:hasUltimateConsolidationParent ?parent .\n  ?parent gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/data/jurisdiction/NO"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "jurisdiction"
+    ],
+    "total_gen_seconds": 14.06,
+    "id": "c07",
+    "tier": "c"
+  },
+  {
+    "question": "For the sub-fund 'European Credit Portfolio', give the legal name of the manager of its umbrella fund.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerLegalName WHERE {\n  ?subfund a gleif-L1:RegisteredEntity ;\n           gleif-L1:hasLegalName \"European Credit Portfolio\" ;\n           kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?managerLegalName .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 27.42,
+        "usage": {
+          "prompt_tokens": 3220,
+          "completion_tokens": 374,
+          "total_tokens": 3594
+        },
+        "status": "ok",
+        "columns": [
+          "managerLegalName"
+        ],
+        "rows": [
+          [
+            "ACM Forvaltning A/S"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 18.835
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?managerLegalName WHERE {\n  ?subfund a gleif-L1:RegisteredEntity ;\n           gleif-L1:hasLegalName \"European Credit Portfolio\" ;\n           kgx:hasUmbrellaFund ?umbrella .\n  ?umbrella kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?managerLegalName .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "ACM Forvaltning A/S"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "managerLegalName"
+    ],
+    "total_gen_seconds": 27.42,
+    "id": "c08",
+    "tier": "c"
+  },
+  {
+    "question": "How many entities with registration status ISSUED are registered in the jurisdiction Germany?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED ;\n     gleif-base:hasLegalJurisdiction jur:DE .\n}",
+        "guard": "Exception: Unknown namespace prefix : gleif-L1",
+        "guard_kind": "syntax",
+        "gen_seconds": 10.75,
+        "usage": {
+          "prompt_tokens": 3214,
+          "completion_tokens": 127,
+          "total_tokens": 3341
+        },
+        "status": "guard_failed",
+        "rows": [],
+        "row_count": 0
+      },
+      {
+        "attempt": 2,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED ;\n     gleif-base:hasLegalJurisdiction jur:DE .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 14.04,
+        "usage": {
+          "prompt_tokens": 3338,
+          "completion_tokens": 155,
+          "total_tokens": 3493
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "183330"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 8.731
+      }
+    ],
+    "n_attempts": 2,
+    "first_time_ok": false,
+    "repaired": true,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED ;\n     gleif-base:hasLegalJurisdiction jur:DE .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "183330"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 24.79,
+    "id": "d01",
+    "tier": "d"
+  },
+  {
+    "question": "How many entities in the register have registration status LAPSED?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\n\nSELECT (COUNT(DISTINCT ?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:LAPSED .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 13.55,
+        "usage": {
+          "prompt_tokens": 3210,
+          "completion_tokens": 172,
+          "total_tokens": 3382
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "1185130"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.493
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\n\nSELECT (COUNT(DISTINCT ?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:LAPSED .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "1185130"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 13.55,
+    "id": "d02",
+    "tier": "d"
+  },
+  {
+    "question": "How many ISSUED entities in Luxembourg have the legal form 'Société à responsabilité limitée'?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n  ?e gleif-base:hasLegalJurisdiction jur:LU .\n  ?e gleif-L1:hasLegalForm ?lf .\n  ?lf rdfs:label \"Société à responsabilité limitée\" .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 23.06,
+        "usage": {
+          "prompt_tokens": 3218,
+          "completion_tokens": 311,
+          "total_tokens": 3529
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "9987"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 7.788
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n  ?e gleif-base:hasLegalJurisdiction jur:LU .\n  ?e gleif-L1:hasLegalForm ?lf .\n  ?lf rdfs:label \"Société à responsabilité limitée\" .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "9987"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 23.06,
+    "id": "d03",
+    "tier": "d"
+  },
+  {
+    "question": "How many entities are classified as funds?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nSELECT (COUNT(?e) AS ?fundCount)\nWHERE {\n  ?e a gleif-L1:Fund .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 7.38,
+        "usage": {
+          "prompt_tokens": 3206,
+          "completion_tokens": 77,
+          "total_tokens": 3283
+        },
+        "status": "ok",
+        "columns": [
+          "fundCount"
+        ],
+        "rows": [
+          [
+            "246235"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.085
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nSELECT (COUNT(?e) AS ?fundCount)\nWHERE {\n  ?e a gleif-L1:Fund .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "246235"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "fundCount"
+    ],
+    "total_gen_seconds": 7.38,
+    "id": "d04",
+    "tier": "d"
+  },
+  {
+    "question": "How many entities registered in Italy have registration status ISSUED?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasLegalJurisdiction jur:IT ;\n     gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n}",
+        "guard": "Exception: Unknown namespace prefix : gleif-L1",
+        "guard_kind": "syntax",
+        "gen_seconds": 12.24,
+        "usage": {
+          "prompt_tokens": 3211,
+          "completion_tokens": 150,
+          "total_tokens": 3361
+        },
+        "status": "guard_failed",
+        "rows": [],
+        "row_count": 0
+      },
+      {
+        "attempt": 2,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasLegalJurisdiction jur:IT ;\n     gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 13.06,
+        "usage": {
+          "prompt_tokens": 3358,
+          "completion_tokens": 139,
+          "total_tokens": 3497
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "169271"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 19.731
+      }
+    ],
+    "n_attempts": 2,
+    "first_time_ok": false,
+    "repaired": true,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasLegalJurisdiction jur:IT ;\n     gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "169271"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 25.3,
+    "id": "d05",
+    "tier": "d"
+  },
+  {
+    "question": "How many entities in the register are sole proprietors?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-L1:SoleProprietor .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 7.71,
+        "usage": {
+          "prompt_tokens": 3209,
+          "completion_tokens": 82,
+          "total_tokens": 3291
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "122391"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.043
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-L1:SoleProprietor .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "122391"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 7.71,
+    "id": "d06",
+    "tier": "d"
+  },
+  {
+    "question": "How many entities have entity status INACTIVE?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasEntityStatus gleif-base:INACTIVE .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.1,
+        "usage": {
+          "prompt_tokens": 3207,
+          "completion_tokens": 153,
+          "total_tokens": 3360
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "246866"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 18.521
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasEntityStatus gleif-base:INACTIVE .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "246866"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 12.1,
+    "id": "d07",
+    "tier": "d"
+  },
+  {
+    "question": "Which five jurisdictions have the most ISSUED entities? Return the jurisdiction and the count.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\n\nSELECT ?jur (COUNT(?e) AS ?cnt)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasLegalJurisdiction ?jur ;\n     gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n}\nGROUP BY ?jur\nORDER BY DESC(?cnt)\nLIMIT 5",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 22.26,
+        "usage": {
+          "prompt_tokens": 3216,
+          "completion_tokens": 306,
+          "total_tokens": 3522
+        },
+        "status": "ok",
+        "columns": [
+          "jur",
+          "cnt"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/data/jurisdiction/IN",
+            "315600"
+          ],
+          [
+            "https://www.gleif.org/data/jurisdiction/DE",
+            "183330"
+          ],
+          [
+            "https://www.gleif.org/data/jurisdiction/IT",
+            "169271"
+          ],
+          [
+            "https://www.gleif.org/data/jurisdiction/NL",
+            "125289"
+          ],
+          [
+            "https://www.gleif.org/data/jurisdiction/ES",
+            "104052"
+          ]
+        ],
+        "row_count": 5,
+        "exec_seconds": 28.929
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\n\nSELECT ?jur (COUNT(?e) AS ?cnt)\nWHERE {\n  ?e a gleif-base:Entity ;\n     gleif-base:hasLegalJurisdiction ?jur ;\n     gleif-base:hasRegistrationStatus gleif-L1:ISSUED .\n}\nGROUP BY ?jur\nORDER BY DESC(?cnt)\nLIMIT 5",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/data/jurisdiction/IN",
+        "315600"
+      ],
+      [
+        "https://www.gleif.org/data/jurisdiction/DE",
+        "183330"
+      ],
+      [
+        "https://www.gleif.org/data/jurisdiction/IT",
+        "169271"
+      ],
+      [
+        "https://www.gleif.org/data/jurisdiction/NL",
+        "125289"
+      ],
+      [
+        "https://www.gleif.org/data/jurisdiction/ES",
+        "104052"
+      ]
+    ],
+    "row_count": 5,
+    "columns": [
+      "jur",
+      "cnt"
+    ],
+    "total_gen_seconds": 22.26,
+    "id": "e01",
+    "tier": "e"
+  },
+  {
+    "question": "How many entities does 'Bank of America, National Association' directly consolidate?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "SELECT ?x WHERE { FILTER(false) }",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 10.32,
+        "usage": {
+          "prompt_tokens": 3213,
+          "completion_tokens": 123,
+          "total_tokens": 3336
+        },
+        "status": "ok",
+        "columns": [
+          "x"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "SELECT ?x WHERE { FILTER(false) }",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "x"
+    ],
+    "total_gen_seconds": 10.32,
+    "id": "e02",
+    "tier": "e"
+  },
+  {
+    "question": "How many funds does 'AMUNDI ASSET MANAGEMENT' manage?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT (COUNT(?fund) AS ?count)\nWHERE {\n  ?manager gleif-L1:hasLegalName \"AMUNDI ASSET MANAGEMENT\" .\n  ?fund   kgx:hasFundManager ?manager .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.73,
+        "usage": {
+          "prompt_tokens": 3212,
+          "completion_tokens": 160,
+          "total_tokens": 3372
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "1259"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.001
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT (COUNT(?fund) AS ?count)\nWHERE {\n  ?manager gleif-L1:hasLegalName \"AMUNDI ASSET MANAGEMENT\" .\n  ?fund   kgx:hasFundManager ?manager .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "1259"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 12.73,
+    "id": "e03",
+    "tier": "e"
+  },
+  {
+    "question": "Which three entities have the most direct consolidation subsidiaries? Give the legal name and the count.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?name (COUNT(?child) AS ?cnt)\nWHERE {\n  ?parent a gleif-L1:RegisteredEntity .\n  ?parent gleif-L1:hasLegalName ?name .\n  ?child kgx:hasDirectConsolidationParent ?parent .\n}\nGROUP BY ?name\nORDER BY DESC(?cnt)\nLIMIT 3",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 23.12,
+        "usage": {
+          "prompt_tokens": 3216,
+          "completion_tokens": 316,
+          "total_tokens": 3532
+        },
+        "status": "ok",
+        "columns": [
+          "name",
+          "cnt"
+        ],
+        "rows": [
+          [
+            "Bank of America, National Association",
+            "503"
+          ],
+          [
+            "Siemens Aktiengesellschaft",
+            "452"
+          ],
+          [
+            "DEUTSCHE BANK AKTIENGESELLSCHAFT",
+            "331"
+          ]
+        ],
+        "row_count": 3,
+        "exec_seconds": 33.195
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?name (COUNT(?child) AS ?cnt)\nWHERE {\n  ?parent a gleif-L1:RegisteredEntity .\n  ?parent gleif-L1:hasLegalName ?name .\n  ?child kgx:hasDirectConsolidationParent ?parent .\n}\nGROUP BY ?name\nORDER BY DESC(?cnt)\nLIMIT 3",
+    "guard": "ok",
+    "rows": [
+      [
+        "Bank of America, National Association",
+        "503"
+      ],
+      [
+        "Siemens Aktiengesellschaft",
+        "452"
+      ],
+      [
+        "DEUTSCHE BANK AKTIENGESELLSCHAFT",
+        "331"
+      ]
+    ],
+    "row_count": 3,
+    "columns": [
+      "name",
+      "cnt"
+    ],
+    "total_gen_seconds": 23.12,
+    "id": "e04",
+    "tier": "e"
+  },
+  {
+    "question": "What are the five most common reasons entities give for not reporting a parent? Return the reason and the count.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nSELECT ?reason (COUNT(?exception) AS ?count)\nWHERE {\n  ?exception a gleif-re:ReportingException ;\n             gleif-re:hasExceptionReason ?reason .\n}\nGROUP BY ?reason\nORDER BY DESC(?count)\nLIMIT 5",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 9.71,
+        "usage": {
+          "prompt_tokens": 3220,
+          "completion_tokens": 110,
+          "total_tokens": 3330
+        },
+        "status": "ok",
+        "columns": [
+          "reason",
+          "count"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/ontology/ReportingException/NATURAL_PERSONS",
+            "2303504"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/NON_CONSOLIDATING",
+            "2178410"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/NO_KNOWN_PERSON",
+            "1327098"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/NO_LEI",
+            "239097"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC",
+            "216076"
+          ]
+        ],
+        "row_count": 5,
+        "exec_seconds": 34.984
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nSELECT ?reason (COUNT(?exception) AS ?count)\nWHERE {\n  ?exception a gleif-re:ReportingException ;\n             gleif-re:hasExceptionReason ?reason .\n}\nGROUP BY ?reason\nORDER BY DESC(?count)\nLIMIT 5",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/ontology/ReportingException/NATURAL_PERSONS",
+        "2303504"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/NON_CONSOLIDATING",
+        "2178410"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/NO_KNOWN_PERSON",
+        "1327098"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/NO_LEI",
+        "239097"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC",
+        "216076"
+      ]
+    ],
+    "row_count": 5,
+    "columns": [
+      "reason",
+      "count"
+    ],
+    "total_gen_seconds": 9.71,
+    "id": "e05",
+    "tier": "e"
+  },
+  {
+    "question": "How many entities in the register report an ultimate consolidation parent?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-elf: <https://www.gleif.org/data/elf/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e kgx:hasUltimateConsolidationParent ?parent .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.53,
+        "usage": {
+          "prompt_tokens": 3210,
+          "completion_tokens": 157,
+          "total_tokens": 3367
+        },
+        "status": "ok",
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            "131923"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.047
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-elf: <https://www.gleif.org/data/elf/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT (COUNT(?e) AS ?count)\nWHERE {\n  ?e kgx:hasUltimateConsolidationParent ?parent .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "131923"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "count"
+    ],
+    "total_gen_seconds": 12.53,
+    "id": "e06",
+    "tier": "e"
+  },
+  {
+    "question": "Which three fund managers manage the most funds? Give the legal name and the count.",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?name (COUNT(?fund) AS ?cnt)\nWHERE {\n  ?fund kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?name .\n}\nGROUP BY ?name\nORDER BY DESC(?cnt)\nLIMIT 3",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 15.43,
+        "usage": {
+          "prompt_tokens": 3215,
+          "completion_tokens": 200,
+          "total_tokens": 3415
+        },
+        "status": "ok",
+        "columns": [
+          "name",
+          "cnt"
+        ],
+        "rows": [
+          [
+            "AMUNDI ASSET MANAGEMENT",
+            "1259"
+          ],
+          [
+            "BLACKROCK INSTITUTIONAL TRUST COMPANY, NATIONAL ASSOCIATION",
+            "1121"
+          ],
+          [
+            "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+            "1114"
+          ]
+        ],
+        "row_count": 3,
+        "exec_seconds": 0.809
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?name (COUNT(?fund) AS ?cnt)\nWHERE {\n  ?fund kgx:hasFundManager ?manager .\n  ?manager gleif-L1:hasLegalName ?name .\n}\nGROUP BY ?name\nORDER BY DESC(?cnt)\nLIMIT 3",
+    "guard": "ok",
+    "rows": [
+      [
+        "AMUNDI ASSET MANAGEMENT",
+        "1259"
+      ],
+      [
+        "BLACKROCK INSTITUTIONAL TRUST COMPANY, NATIONAL ASSOCIATION",
+        "1121"
+      ],
+      [
+        "Universal-Investment-Gesellschaft mit beschränkter Haftung",
+        "1114"
+      ]
+    ],
+    "row_count": 3,
+    "columns": [
+      "name",
+      "cnt"
+    ],
+    "total_gen_seconds": 15.43,
+    "id": "e07",
+    "tier": "e"
+  },
+  {
+    "question": "Does the entity named 'M-M FRANCE' report a direct consolidation parent? If not, what reason does it give?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?reason WHERE {\n  ?e a gleif-L1:RegisteredEntity ;\n     gleif-L1:hasLegalName \"M-M FRANCE\" .\n  OPTIONAL { ?e kgx:hasDirectConsolidationParent ?parent . }\n  FILTER (!bound(?parent))\n  ?ex gleif-re:hasReportingEntity ?e ;\n      gleif-re:hasExceptionReason ?reason .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 24.26,
+        "usage": {
+          "prompt_tokens": 3223,
+          "completion_tokens": 333,
+          "total_tokens": 3556
+        },
+        "status": "ok",
+        "columns": [
+          "reason"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/ontology/ReportingException/NO_LEI"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/NO_LEI"
+          ]
+        ],
+        "row_count": 2,
+        "exec_seconds": 64.864
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\n\nSELECT ?reason WHERE {\n  ?e a gleif-L1:RegisteredEntity ;\n     gleif-L1:hasLegalName \"M-M FRANCE\" .\n  OPTIONAL { ?e kgx:hasDirectConsolidationParent ?parent . }\n  FILTER (!bound(?parent))\n  ?ex gleif-re:hasReportingEntity ?e ;\n      gleif-re:hasExceptionReason ?reason .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/ontology/ReportingException/NO_LEI"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/NO_LEI"
+      ]
+    ],
+    "row_count": 2,
+    "columns": [
+      "reason"
+    ],
+    "total_gen_seconds": 24.26,
+    "id": "f01",
+    "tier": "f1"
+  },
+  {
+    "question": "Why does 'DAINEN INDIA PRIVATE LIMITED' not report an accounting consolidation parent?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\n\nSELECT ?reason WHERE {\n  ?entity a gleif-L1:RegisteredEntity ;\n          gleif-L1:hasLegalName \"DAINEN INDIA PRIVATE LIMITED\" .\n  ?exception gleif-re:hasReportingEntity ?entity ;\n             gleif-re:hasExceptionReason ?reason .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 15.03,
+        "usage": {
+          "prompt_tokens": 3215,
+          "completion_tokens": 191,
+          "total_tokens": 3406
+        },
+        "status": "ok",
+        "columns": [
+          "reason"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC"
+          ]
+        ],
+        "row_count": 2,
+        "exec_seconds": 11.439
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\n\nSELECT ?reason WHERE {\n  ?entity a gleif-L1:RegisteredEntity ;\n          gleif-L1:hasLegalName \"DAINEN INDIA PRIVATE LIMITED\" .\n  ?exception gleif-re:hasReportingEntity ?entity ;\n             gleif-re:hasExceptionReason ?reason .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC"
+      ]
+    ],
+    "row_count": 2,
+    "columns": [
+      "reason"
+    ],
+    "total_gen_seconds": 15.03,
+    "id": "f02",
+    "tier": "f1"
+  },
+  {
+    "question": "What reason does 'INVITATION HOMES OPERATING PARTNERSHIP LP' give for not reporting a parent?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\n\nSELECT DISTINCT ?exceptionReason WHERE {\n  ?entity gleif-L1:hasLegalName \"INVITATION HOMES OPERATING PARTNERSHIP LP\" .\n  ?ex gleif-re:hasReportingEntity ?entity ;\n      gleif-re:hasExceptionReason ?exceptionReason .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 14.81,
+        "usage": {
+          "prompt_tokens": 3221,
+          "completion_tokens": 187,
+          "total_tokens": 3408
+        },
+        "status": "ok",
+        "columns": [
+          "exceptionReason"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC"
+          ]
+        ],
+        "row_count": 1,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\n\nSELECT DISTINCT ?exceptionReason WHERE {\n  ?entity gleif-L1:hasLegalName \"INVITATION HOMES OPERATING PARTNERSHIP LP\" .\n  ?ex gleif-re:hasReportingEntity ?entity ;\n      gleif-re:hasExceptionReason ?exceptionReason .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/ontology/ReportingException/NON_PUBLIC"
+      ]
+    ],
+    "row_count": 1,
+    "columns": [
+      "exceptionReason"
+    ],
+    "total_gen_seconds": 14.81,
+    "id": "f03",
+    "tier": "f1"
+  },
+  {
+    "question": "What reason does the entity with LEI 549300KX9MM0Z21Y1Q08 give for not reporting a consolidation parent?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?reason WHERE {\n  ?exgleif-re:hasReportingEntity lei:549300KX9MM0Z21Y1Q08 .\n  ?exgleif-re:hasExceptionReason ?reason .\n}",
+        "guard": "ParseException: Expected SelectQuery, found '?'  (at char 142), (line:5, col:3)",
+        "guard_kind": "syntax",
+        "gen_seconds": 11.14,
+        "usage": {
+          "prompt_tokens": 3228,
+          "completion_tokens": 126,
+          "total_tokens": 3354
+        },
+        "status": "guard_failed",
+        "rows": [],
+        "row_count": 0
+      },
+      {
+        "attempt": 2,
+        "sparql": "PREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?reason WHERE {\n  ?ex gleif-re:hasReportingEntity lei:549300KX9MM0Z21Y1Q08 .\n  ?ex gleif-re:hasExceptionReason ?reason .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 10.47,
+        "usage": {
+          "prompt_tokens": 3367,
+          "completion_tokens": 99,
+          "total_tokens": 3466
+        },
+        "status": "ok",
+        "columns": [
+          "reason"
+        ],
+        "rows": [
+          [
+            "https://www.gleif.org/ontology/ReportingException/CONSENT_NOT_OBTAINED"
+          ],
+          [
+            "https://www.gleif.org/ontology/ReportingException/CONSENT_NOT_OBTAINED"
+          ]
+        ],
+        "row_count": 2,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 2,
+    "first_time_ok": false,
+    "repaired": true,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-re: <https://www.gleif.org/ontology/ReportingException/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?reason WHERE {\n  ?ex gleif-re:hasReportingEntity lei:549300KX9MM0Z21Y1Q08 .\n  ?ex gleif-re:hasExceptionReason ?reason .\n}",
+    "guard": "ok",
+    "rows": [
+      [
+        "https://www.gleif.org/ontology/ReportingException/CONSENT_NOT_OBTAINED"
+      ],
+      [
+        "https://www.gleif.org/ontology/ReportingException/CONSENT_NOT_OBTAINED"
+      ]
+    ],
+    "row_count": 2,
+    "columns": [
+      "reason"
+    ],
+    "total_gen_seconds": 21.61,
+    "id": "f04",
+    "tier": "f1"
+  },
+  {
+    "question": "What percentage of the shares of the entity with LEI 5493002WI30SR6SIUH74 is held by its parent?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "SELECT ?x WHERE { FILTER(false) }",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 4.56,
+        "usage": {
+          "prompt_tokens": 3226,
+          "completion_tokens": 28,
+          "total_tokens": 3254
+        },
+        "status": "ok",
+        "columns": [
+          "x"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "SELECT ?x WHERE { FILTER(false) }",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "x"
+    ],
+    "total_gen_seconds": 4.56,
+    "id": "f05",
+    "tier": "f2"
+  },
+  {
+    "question": "What was the annual revenue of Siemens Aktiengesellschaft last year?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "SELECT ?x WHERE { FILTER(false) }",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 4.35,
+        "usage": {
+          "prompt_tokens": 3210,
+          "completion_tokens": 30,
+          "total_tokens": 3240
+        },
+        "status": "ok",
+        "columns": [
+          "x"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "SELECT ?x WHERE { FILTER(false) }",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "x"
+    ],
+    "total_gen_seconds": 4.35,
+    "id": "f06",
+    "tier": "f2"
+  },
+  {
+    "question": "Who are the beneficial owners of Allianz SE and what stake does each hold?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "SELECT ?x WHERE { FILTER(false) }",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 4.35,
+        "usage": {
+          "prompt_tokens": 3213,
+          "completion_tokens": 29,
+          "total_tokens": 3242
+        },
+        "status": "ok",
+        "columns": [
+          "x"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "SELECT ?x WHERE { FILTER(false) }",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "x"
+    ],
+    "total_gen_seconds": 4.35,
+    "id": "f07",
+    "tier": "f2"
+  },
+  {
+    "question": "How many employees does DEUTSCHE BANK AKTIENGESELLSCHAFT have?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "SELECT ?x WHERE { FILTER(false) }",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 4.51,
+        "usage": {
+          "prompt_tokens": 3216,
+          "completion_tokens": 30,
+          "total_tokens": 3246
+        },
+        "status": "ok",
+        "columns": [
+          "x"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "SELECT ?x WHERE { FILTER(false) }",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "x"
+    ],
+    "total_gen_seconds": 4.51,
+    "id": "f08",
+    "tier": "f2"
+  },
+  {
+    "question": "What is the legal name of the entity with LEI ZZZZNOTAREALLEI00000?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?name WHERE {\n  lei:ZZZZNOTAREALLEEI00000 gleif-L1:hasLegalName ?name .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 11.89,
+        "usage": {
+          "prompt_tokens": 3219,
+          "completion_tokens": 139,
+          "total_tokens": 3358
+        },
+        "status": "ok",
+        "columns": [
+          "name"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?name WHERE {\n  lei:ZZZZNOTAREALLEEI00000 gleif-L1:hasLegalName ?name .\n}",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "name"
+    ],
+    "total_gen_seconds": 11.89,
+    "id": "f09",
+    "tier": "f3"
+  },
+  {
+    "question": "In which jurisdiction is the entity named 'Definitely Not A Real Company Ltd' registered?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT ?jurisdiction WHERE {\n  ?entity a gleif-base:Entity ;\n          gleif-L1:hasLegalName \"Definitely Not A Real Company Ltd\" ;\n          gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 12.17,
+        "usage": {
+          "prompt_tokens": 3215,
+          "completion_tokens": 146,
+          "total_tokens": 3361
+        },
+        "status": "ok",
+        "columns": [
+          "jurisdiction"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 11.401
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX jur: <https://www.gleif.org/data/jurisdiction/>\n\nSELECT ?jurisdiction WHERE {\n  ?entity a gleif-base:Entity ;\n          gleif-L1:hasLegalName \"Definitely Not A Real Company Ltd\" ;\n          gleif-base:hasLegalJurisdiction ?jurisdiction .\n}",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "jurisdiction"
+    ],
+    "total_gen_seconds": 12.17,
+    "id": "f10",
+    "tier": "f3"
+  },
+  {
+    "question": "Who is the direct consolidation parent of the entity with LEI 00000000000000000000?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?parent WHERE {\n  lei:00000000000000000000 kgx:hasDirectConsolidationParent ?parent .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 11.71,
+        "usage": {
+          "prompt_tokens": 3219,
+          "completion_tokens": 135,
+          "total_tokens": 3354
+        },
+        "status": "ok",
+        "columns": [
+          "parent"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\nPREFIX kgx: <https://example.org/gleif-kg/ontology/>\nPREFIX lei: <https://www.gleif.org/data/lei/>\n\nSELECT ?parent WHERE {\n  lei:00000000000000000000 kgx:hasDirectConsolidationParent ?parent .\n}",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "parent"
+    ],
+    "total_gen_seconds": 11.71,
+    "id": "f11",
+    "tier": "f3"
+  },
+  {
+    "question": "What is the legal form of the entity named 'Acme Fictional Holdings GmbH'?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\n\nSELECT ?form WHERE {\n  ?e gleif-L1:hasLegalName \"Acme Fictional Holdings GmbH\" .\n  ?e gleif-L1:hasLegalForm ?form .\n}",
+        "guard": "ok",
+        "guard_kind": "ok",
+        "gen_seconds": 15.86,
+        "usage": {
+          "prompt_tokens": 3216,
+          "completion_tokens": 202,
+          "total_tokens": 3418
+        },
+        "status": "ok",
+        "columns": [
+          "form"
+        ],
+        "rows": [],
+        "row_count": 0,
+        "exec_seconds": 0.0
+      }
+    ],
+    "n_attempts": 1,
+    "first_time_ok": true,
+    "repaired": false,
+    "unresolved": false,
+    "status": "ok",
+    "sparql": "PREFIX gleif-L1: <https://www.gleif.org/ontology/L1/>\nPREFIX gleif-base: <https://www.gleif.org/ontology/Base/>\n\nSELECT ?form WHERE {\n  ?e gleif-L1:hasLegalName \"Acme Fictional Holdings GmbH\" .\n  ?e gleif-L1:hasLegalForm ?form .\n}",
+    "guard": "ok",
+    "rows": [],
+    "row_count": 0,
+    "columns": [
+      "form"
+    ],
+    "total_gen_seconds": 15.86,
+    "id": "f12",
+    "tier": "f3"
+  }
+]

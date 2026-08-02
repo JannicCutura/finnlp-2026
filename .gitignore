@@ -216,3 +216,36 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# GLEIF golden-copy data + derived graph: large and fully regenerable
+# (re-download from gleif.org, then gleif_to_rdf -> load_oxigraph). Never commit.
+# NB: .gitignore has NO inline comments -- pattern and comment must be on separate lines.
+data/raw/*.zip
+data/*.csv
+# converted N-Triples (~12 GiB)
+data/*.nt
+# RocksDB triplestore (~9.4 GiB) -- built by load_oxigraph.py
+data/oxigraph/
+build/
+
+# LaTeX build artifacts -- regenerable via `make paper` (both paper.* and
+# paper_final.*). The PDFs themselves are left trackable.
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Kept out of the (public / anonymised) code release for double-blind review:
+# paper/ carries the author's name, affiliation and email in the camera-ready block;
+# agent-files/ holds private research notes; blog/ names the author (style guide,
+# draft post). The code repo is the reproducibility artifacts only (src/, schema/,
+# eval/, results/, README, Makefile, requirements).
+paper/
+agent-files/
+blog/
