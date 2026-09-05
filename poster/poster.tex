@@ -1,0 +1,383 @@
+% =====================================================================
+%  FinNLP 2026 poster -- A0 portrait (841 x 1189 mm)
+%  Build:  cd poster && pdflatex -interaction=nonstopmode poster.tex
+%  Palette and icon language are inherited from blog/pipeline.tex so the
+%  poster and the paper figure read as one piece.
+% =====================================================================
+\documentclass{article}
+
+\usepackage[paperwidth=841mm,paperheight=1189mm,margin=38mm,footskip=0pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{positioning, calc}
+
+\definecolor{ink}{HTML}{1A1F26}
+\definecolor{muted}{HTML}{6B7480}
+\definecolor{teal}{HTML}{0F6E63}
+\definecolor{tealsoft}{HTML}{E2F0ED}
+\definecolor{rulec}{HTML}{D5DAE1}
+\definecolor{ground}{HTML}{F1F3F6}
+\definecolor{warm}{HTML}{9A5B12}
+\definecolor{warmsoft}{HTML}{FBF0E2}
+
+\color{ink}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6mm}
+\renewcommand{\arraystretch}{1.35}
+
+% ---------- type scale for A0 ----------
+\newcommand{\TitleF}{\fontsize{86}{96}\selectfont\bfseries}
+\newcommand{\SubtitleF}{\fontsize{46}{56}\selectfont}
+\newcommand{\BylineF}{\fontsize{30}{40}\selectfont}
+\newcommand{\HeadF}{\fontsize{38}{46}\selectfont\bfseries}
+\newcommand{\BodyF}{\fontsize{26}{36}\selectfont}
+\newcommand{\SmallF}{\fontsize{22}{30}\selectfont}
+\newcommand{\TabF}{\fontsize{24}{32}\selectfont}
+\newcommand{\CodeF}{\fontsize{21}{27}\selectfont\ttfamily}
+
+% ---------- building blocks ----------
+\newcounter{sec}
+\newcommand{\heading}[1]{%
+  \vspace{2mm}%
+  {\color{teal}\rule{\linewidth}{2.4pt}}\par\vspace{3mm}%
+  \stepcounter{sec}%
+  {\HeadF\textcolor{teal}{\thesec.}~#1\par}\vspace{-2mm}}
+
+\newcommand{\panel}[2][tealsoft]{%
+  \begin{tikzpicture}
+    \node[fill=#1, rounded corners=6pt, inner sep=10mm,
+          text width=\dimexpr\linewidth-22mm\relax, align=left] {#2};
+  \end{tikzpicture}}
+
+\newcommand{\codepanel}[2][ground]{%
+  \begin{tikzpicture}
+    \node[fill=#1, draw=rulec, line width=1.2pt, rounded corners=6pt, inner sep=9mm,
+          text width=\dimexpr\linewidth-22mm\relax, align=left,
+          font=\CodeF] {#2};
+  \end{tikzpicture}}
+
+\newcommand{\stage}[2]{{\SmallF\bfseries\textcolor{teal}{#1}}~{\SmallF\textcolor{muted}{#2}}\par\vspace{2mm}}
+
+\newcommand{\takeaway}[1]{{\BodyF\itshape\textcolor{teal}{#1}\par}}
+
+\newlength{\colw}
+\setlength{\colw}{0.315\textwidth}
+\newlength{\colgap}
+\setlength{\colgap}{0.0275\textwidth}
+
+\begin{document}
+\BodyF
+
+% =====================================================================
+%  HEADER
+% =====================================================================
+\begin{tikzpicture}
+  \node[fill=ink, rounded corners=8pt, inner xsep=16mm, inner ysep=14mm,
+        text width=\dimexpr\linewidth-32mm\relax, align=left] {%
+    \color{white}
+    {\TitleF Trust the Query, Not the Answer\par}
+    \vspace{4mm}
+    {\SubtitleF\color{tealsoft} Auditable Text-to-SPARQL over the GLEIF Register\par}
+    \vspace{9mm}
+    {\BylineF Jannic Alexander Cutura\quad\textcolor{rulec}{\textbar}\quad
+     European Central Bank\quad\textcolor{rulec}{\textbar}\quad DSTI School of Engineering
+     \hfill \texttt{github.com/JannicCutura/finnlp-2026}\par}};
+\end{tikzpicture}
+
+\vspace{6mm}
+
+% =====================================================================
+%  THREE COLUMNS
+% =====================================================================
+\noindent
+% ---------------------------------------------------------------- COL 1
+\begin{minipage}[t]{\colw}
+\BodyF
+
+\heading{The problem}
+
+In anti-money-laundering screening, credit-risk assessment and banking supervision
+an answer is useful only if it can be traced back to a source record. A language
+model asked directly does not meet that bar: ask a general-purpose chat assistant
+which entities Siemens consolidates and it returns about a dozen plausible names,
+none of them carrying the identifier you would need to check it. Ask the register
+and you get exactly \textbf{452} entities that report Siemens Aktiengesellschaft as
+their direct consolidation parent, each one traceable to its record by LEI.
+
+\vspace{2mm}
+\takeaway{So do not trust the answer. Trust the query, and read it.}
+
+\heading{The register}
+
+GLEIF publishes the Legal Entity Identifier register as CC0 open data with an
+official RDF ontology --- a real regulatory source rather than an encyclopaedic or
+synthetic graph. We pin one 8-hourly publish and query it locally.
+
+\vspace{1mm}
+\panel{%
+\BodyF
+\begin{tabular}{@{}l@{\hspace{8mm}}r@{}}
+Level 1 entity records         & 3{,}382{,}301 \\
+\quad of which \textsc{issued} & 1{,}940{,}941 \\
+Level 2 relationships          & 481{,}557 \\
+Triples in the store           & 69.7\,M \\
+Populated predicates           & 27 \\
+Guard vocabulary               & 71 terms \\
+Snapshot                       & \texttt{20260723-1600} \\
+\end{tabular}
+\par\vspace{4mm}
+{\SmallF\textcolor{muted}{The 71-term guard vocabulary is everything a query may
+name: all 27 populated predicates, plus the 44 classes and enumerated code values
+they take. Every term is count-backed --- it is in the prompt because it is in the
+graph.}}}
+
+\heading{The system}
+
+A local open-weight model (\texttt{gpt-oss-20b}, served through LM Studio at
+temperature 0, prompting only, no training) turns the question into candidate
+SPARQL. A guard checks the query \emph{before} it runs; a bounded repair loop of at
+most two retries feeds the guard's diagnostic back to the model. The query, its
+rows and the LEIs behind them are returned with every answer.
+
+\vspace{3mm}
+\includegraphics[width=\linewidth]{../blog/pipeline.pdf}
+
+\vspace{2mm}
+{\SmallF\textcolor{muted}{One shot, not agentic search: the guard, and not iterative
+graph exploration, is what keeps the output valid. The loop never retries on an
+empty result --- for a question the register cannot answer, empty is the right
+answer.}}
+
+\heading{Cost}
+
+Queries return in well under a second, except full-population aggregates at 14--28
+seconds. Latency is dominated by generation (15--40 seconds), not by the store. The
+whole system runs on one machine and makes no external call, so the data never
+leaves the premises.
+
+\end{minipage}
+\hspace{\colgap}
+% ---------------------------------------------------------------- COL 2
+\begin{minipage}[t]{\colw}
+\BodyF
+
+\heading{One question, end to end}
+
+A held-out item (\texttt{h55}), exactly as the system logged it. This is the whole
+audit trail an analyst sees.
+
+\vspace{1mm}
+\stage{Question}{business language, names no predicate}
+\codepanel[tealsoft]{What is the legal form name of the direct\\
+consolidation parent of 'AMERICAN AXLE \&\\
+MANUFACTURING, INC.'?}
+
+\vspace{-4mm}
+\stage{Attempt 1}{model output --- rejected by the guard}
+\codepanel{SELECT ?parentFormLabel WHERE \{\\
+\ \ ?child a gleif-L1:RegisteredEntity ;\\
+\ \ \ \ \ \ \ \ \ gleif-L1:hasLegalName\\
+\ \ \ \ \ \ \ \ \ \ \ "AMERICAN AXLE \& MANUFACTURING, INC." .\\
+\ \ ?child kgx:hasDirectConsolidationParent ?parent .\\
+\ \ \textcolor{warm}{?parent gleif-base:hasLegalForm ?form .}\\
+\ \ ?form rdfs:label ?parentFormLabel .\\
+\}}
+
+\vspace{-4mm}
+\panel[warmsoft]{\SmallF\textbf{\textcolor{warm}{Guard:}} unknown vocabulary
+\texttt{gleif-base:hasLegalForm} --- the predicate does not exist in the graph.
+Closest match: \texttt{gleif-L1:hasLegalForm}. The query never reaches the store.}
+
+\vspace{-4mm}
+\stage{Attempt 2}{repaired --- passes the guard, executes}
+\codepanel{PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema\#>\\
+SELECT ?parentFormLabel WHERE \{\\
+\ \ ?child a gleif-L1:RegisteredEntity ;\\
+\ \ \ \ \ \ \ \ \ gleif-L1:hasLegalName\\
+\ \ \ \ \ \ \ \ \ \ \ "AMERICAN AXLE \& MANUFACTURING, INC." .\\
+\ \ ?child kgx:hasDirectConsolidationParent ?parent .\\
+\ \ \textcolor{teal}{?parent gleif-L1:hasLegalForm ?form .}\\
+\ \ ?form rdfs:label ?parentFormLabel .\\
+\}}
+
+\vspace{-4mm}
+\stage{Answer, with the records behind it}{}
+\codepanel[tealsoft]{parentFormLabel\\
+-----------------\\
+"Corporation"\\[7mm]
+\textcolor{muted}{child\ \ lei:RY5TAKFOBLDUGX31MS24\\
+parent lei:254900SMQY98VFKNCC32\\
+form\ \ \ elf:XTIQ\ \ (ISO 20275)}}
+
+\heading{What the guard does not do}
+
+The guard is an existence check, not a semantic one. It guarantees that the query
+parses and that every term it names is in the graph, which is what stops a
+hallucinated predicate from ever reaching the store. It does \textbf{not} guarantee
+that the query means what the question asked.
+
+\vspace{2mm}
+\takeaway{That boundary is the design and not a gap in it: a wrong answer arrives
+as a readable query returning wrong rows, never as fluent prose.}
+
+\heading{Where the errors are not}
+
+All twelve held-out errors are queries that ran and returned the wrong rows. None
+is invalid, none names a predicate that does not exist, and the model declines
+every out-of-scope and absent-entity question it is given.
+
+\vspace{1mm}
+\begin{center}\TabF
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{Error type} & \textbf{n} \\
+\midrule
+String / entity matching        & 4 \\
+Literal typing                  & 2 \\
+Wrong predicate / value / scope & 3 \\
+Result shape / aggregation      & 3 \\
+\midrule
+\textbf{Total} & \textbf{12} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{-2mm}
+\takeaway{Every one of the twelve is visible in the query itself, which is the
+property the setting demanded.}
+
+\end{minipage}
+\hspace{\colgap}
+% ---------------------------------------------------------------- COL 3
+\begin{minipage}[t]{\colw}
+\BodyF
+
+\heading{Benchmark}
+
+144 questions over six tiers, written from a specification fixed \emph{before}
+instantiation around a KYC analyst, a supervisor and a fund-operations user, in
+business language naming no predicate or IRI. Every reference query is executed
+against the pinned snapshot, so its result --- the gold answer --- cannot drift
+from the graph. The 54-question development set drove three schema revisions; the
+90-question held-out set was written afterwards against a frozen prompt and
+informed none.
+
+\vspace{1mm}
+\begin{center}\TabF
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & \multicolumn{2}{c}{\textbf{20B}} & \textbf{120B} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-4}
+\textbf{Tier} & Dev & Held & Held \\
+\midrule
+a\ \ lookup           & 10/10 & 10/15 & 12/15 \\
+b\ \ single-hop       & 10/10 & 14/14 & 14/14 \\
+c\ \ multi-hop        & 8/8   & 13/15 & 14/15 \\
+d\ \ attribute filter & 7/7   & 14/15 & 14/15 \\
+e\ \ aggregate        & 6/7   & 13/15 & 11/15 \\
+f\ \ unanswerable     & 12/12 & 14/16 & 14/16 \\
+\midrule
+\textbf{Exec.\ accuracy}  & \textbf{98.1\%} & \textbf{86.7\%} & \textbf{87.8\%} \\
+\quad 95\% CI             & 90--100 & 78--92 & 79--93 \\
+QALD macro-F1             & 0.981 & 0.897 & 0.893 \\
+Validity rate             & 100\% & 100\% & 98.9\% \\
+First-try / repaired      & 48/6 & 82/8 & 80/9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\heading{What each part buys}
+
+\begin{center}\TabF
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Held-out (20B)} & \textbf{Valid} & \textbf{Acc} \\
+\midrule
+Full system (guard + repair) & 100\%  & 86.7\% \\
+\quad $-$ guard \& repair    & 91.1\% & 80.0\% \\
+\midrule
+\quad $-$ vocabulary         & 100\%  & 32.2\% \\
+\quad $-$ schema             & 100\%  & 13.3\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{-2mm}
+{\SmallF\textcolor{muted}{The in-prompt schema does most of the work: strip the
+vocabulary and accuracy falls to 32.2\%, strip the schema and it collapses to
+13.3\%. The guard and the two-retry loop add the last 6.7 points and take validity
+to 100\%.}}
+
+\heading{Models}
+
+\begin{center}\TabF
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Held-out} & \textbf{Acc} & \textbf{95\% CI} & \textbf{Valid} \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Local, open-weight}} \\
+\quad gpt-oss-20b        & 86.7\% & 78--92 & 100\% \\
+\quad gpt-oss-120b       & 87.8\% & 79--93 & 98.9\% \\
+\quad Qwen2.5-Coder-32B  & 85.6\% & 77--91 & 97\% \\
+\quad Llama-3.3-70B      & 70.0\% & 60--78 & 97\% \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Non-local reference (not deployable)}} \\
+\quad gpt-5              & 90.0\% & 82--95 & 100\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{-2mm}
+{\SmallF\textcolor{muted}{Model size is not the bottleneck and open versus closed is
+not either; training focus is. The three code-tuned models sit inside one another's
+intervals, the general instruction model is 16 points below them, and the closed
+frontier reference leads by about three points.}}
+
+\heading{Limits, and what is next}
+
+144 questions on one graph with a thin schema, one snapshot, one machine, one run
+per model, and no user study yet. The construction, however, is not specific to
+corporate structure: it is a model writing queries against any source described by
+an ontology. Real data sits across relational stores, graph stores, document stores
+and PDFs, each with its own query language --- extending the same
+generate--guard--repair loop across them, routing each question to the store that
+can answer it and keeping every answer decomposable into a checkable query, is the
+direction we intend to pursue.
+
+\end{minipage}
+
+\vspace{4mm}
+
+% =====================================================================
+%  FOOTER
+% =====================================================================
+\noindent
+\begin{tikzpicture}
+  \node[fill=tealsoft, rounded corners=8pt, inner xsep=16mm, inner ysep=9mm,
+        text width=\dimexpr\textwidth-32mm\relax, align=left] {%
+    \BylineF
+    \begin{minipage}[c]{0.70\dimexpr\textwidth-32mm\relax}
+      \textcolor{teal}{\textbf{86.7\%} of 90 held-out questions answered correctly,
+      every one with a valid query behind it --- and every error visible in that
+      query.}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.28\dimexpr\textwidth-32mm\relax}
+      \raggedleft\SmallF\textcolor{muted}{Code, prompts and benchmark\\
+      \texttt{github.com/JannicCutura/finnlp-2026}}
+    \end{minipage}
+    \par\vspace{6mm}
+    {\color{rulec}\rule{\linewidth}{1pt}}\par\vspace{4mm}
+    {\setlength{\parskip}{0pt}\SmallF\textcolor{muted}{The views expressed in this
+     poster are those of the author and do not necessarily reflect those of the
+     European Central Bank or the Eurosystem.}\par}};
+\end{tikzpicture}
+
+\end{document}
