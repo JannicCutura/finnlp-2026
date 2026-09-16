@@ -23,9 +23,7 @@
 \definecolor{teal}{HTML}{0F6E63}
 \definecolor{tealsoft}{HTML}{E2F0ED}
 \definecolor{rulec}{HTML}{D5DAE1}
-\definecolor{ground}{HTML}{F1F3F6}
 \definecolor{warm}{HTML}{9A5B12}
-\definecolor{warmsoft}{HTML}{FBF0E2}
 
 \color{ink}
 \pagestyle{empty}
@@ -41,39 +39,74 @@
 \newcommand{\BodyF}{\fontsize{26}{36}\selectfont}
 \newcommand{\SmallF}{\fontsize{22}{30}\selectfont}
 \newcommand{\TabF}{\fontsize{24}{32}\selectfont}
-\newcommand{\CodeF}{\fontsize{21}{27}\selectfont\ttfamily}
 
 % ---------- building blocks ----------
 \newcounter{sec}
 \newcommand{\heading}[1]{%
-  \vspace{2mm}%
-  {\color{teal}\rule{\linewidth}{2.4pt}}\par\vspace{3mm}%
+  \vspace{1mm}%
+  {\color{teal}\rule{\linewidth}{2.4pt}}\par\vspace{2mm}%
   \stepcounter{sec}%
   {\HeadF\textcolor{teal}{\thesec.}~#1\par}\vspace{-2mm}}
 
 \newcommand{\panel}[2][tealsoft]{%
   \begin{tikzpicture}
-    \node[fill=#1, rounded corners=6pt, inner sep=10mm,
-          text width=\dimexpr\linewidth-22mm\relax, align=left] {#2};
+    \node[fill=#1, rounded corners=6pt, inner sep=7mm,
+          text width=\dimexpr\linewidth-16mm\relax, align=left] {#2};
   \end{tikzpicture}}
-
-\newcommand{\codepanel}[2][ground]{%
-  \begin{tikzpicture}
-    \node[fill=#1, draw=rulec, line width=1.2pt, rounded corners=6pt, inner sep=9mm,
-          text width=\dimexpr\linewidth-22mm\relax, align=left,
-          font=\CodeF] {#2};
-  \end{tikzpicture}}
-
-\newcommand{\stage}[2]{{\SmallF\bfseries\textcolor{teal}{#1}}~{\SmallF\textcolor{muted}{#2}}\par\vspace{2mm}}
 
 \newcommand{\takeaway}[1]{{\BodyF\itshape\textcolor{teal}{#1}\par}}
+
+% Horizontal bar with a value label at its end, for the ablation chart.
+% #1 y-offset (mm)  #2 value (0-100)  #3 row label  #4 bar color
+\newcommand{\abbar}[4]{%
+  \node[anchor=south west, font=\SmallF, text=ink] at (0,#1+5.5) {#3};
+  \draw[fill=#4, draw=none] (0,#1) rectangle (#2,#1+5);
+  \node[anchor=west, font=\SmallF\bfseries, text=ink] at (#2+2,#1+2.5) {#2\%};
+}
+% Horizontal bar plus a 95% CI whisker, for the model-comparison chart.
+% #1 y-offset  #2 accuracy  #3 CI low  #4 CI high  #5 row label  #6 bar color
+\newcommand{\modbar}[6]{%
+  \node[anchor=south west, font=\SmallF, text=ink] at (0,#1+5.5) {#5};
+  \draw[fill=#6, draw=none] (0,#1) rectangle (#2,#1+5);
+  \draw[ink, line width=0.5pt] (#3,#1+2.5) -- (#4,#1+2.5);
+  \draw[ink, line width=0.5pt] (#3,#1+1.2) -- (#3,#1+3.8);
+  \draw[ink, line width=0.5pt] (#4,#1+1.2) -- (#4,#1+3.8);
+  \node[anchor=west, font=\SmallF\bfseries, text=ink] at (#4+2,#1+2.5) {#2\%};
+}
+\newcommand{\baraxis}{%
+  \draw[rulec] (0,-4) -- (100,-4);
+  \node[anchor=north, font=\SmallF, text=muted] at (0,-4) {0};
+  \node[anchor=north, font=\SmallF, text=muted] at (50,-4) {50};
+  \node[anchor=north, font=\SmallF, text=muted] at (100,-4) {100\%};
+}
+% Small integer-count bar (max 4), for the error-type breakdown.
+% #1 y-offset  #2 count  #3 row label
+\newcommand{\errbar}[3]{%
+  \node[anchor=south west, font=\SmallF, text=ink] at (0,#1+5.5) {#3};
+  \draw[fill=teal!70, draw=none] (0,#1) rectangle (#2,#1+5);
+  \node[anchor=west, font=\SmallF\bfseries, text=ink] at (#2+0.1,#1+2.5) {#2};
+}
 
 \newlength{\colw}
 \setlength{\colw}{0.315\textwidth}
 \newlength{\colgap}
 \setlength{\colgap}{0.0275\textwidth}
+% Width spanning columns 1+2, used once to run the subsidiary map across
+% both columns.
+\newlength{\twocolw}
+\setlength{\twocolw}{\dimexpr 2\colw+\colgap\relax}
+\newlength{\mapdispw}
+\setlength{\mapdispw}{\dimexpr \twocolw*90/100\relax}
+\newlength{\mapht}
+\setlength{\mapht}{\dimexpr \mapdispw*19584/47520\relax}
 
 \begin{document}
+% Column 1 opens with the map (see below); column 2 must reserve the same
+% height -- map plus its one-line caption -- before starting its own first
+% heading, otherwise that heading would land underneath the map bleeding
+% across from column 1.
+\newlength{\mapreserve}
+\setlength{\mapreserve}{\dimexpr \mapht+12mm\relax}
 \BodyF
 
 % =====================================================================
@@ -102,15 +135,26 @@
 \begin{minipage}[t]{\colw}
 \BodyF
 
+% \raisebox{-\height}{...}: as the very first item in a minipage[t], a bare
+% \includegraphics would set the box's reference point from the IMAGE's own
+% height (not a text baseline like every other column), silently promoting
+% the whole map height into the row's height component on top of its depth --
+% inflating the effective row height far more than the image's real size.
+\raisebox{-\height}{\includegraphics[width=\mapdispw]{../blog/subsidiary_map_poster.pdf}}
+
+\vspace{1mm}
+\parbox{\mapdispw}{\centering\SmallF\textcolor{muted}{452 direct
+subsidiaries of Siemens Aktiengesellschaft, by country of registration --- circle
+area proportional to count.}}
+
 \heading{The problem}
 
-In anti-money-laundering screening, credit-risk assessment and banking supervision
-an answer is useful only if it can be traced back to a source record. A language
-model asked directly does not meet that bar: ask a general-purpose chat assistant
-which entities Siemens consolidates and it returns about a dozen plausible names,
-none of them carrying the identifier you would need to check it. Ask the register
-and you get exactly \textbf{452} entities that report Siemens Aktiengesellschaft as
-their direct consolidation parent, each one traceable to its record by LEI.
+In anti-money-laundering screening, credit-risk and supervision an answer is
+useful only if it traces back to a source record. Ask a chat assistant which
+entities Siemens consolidates and it returns a dozen plausible names, none
+carrying the identifier you would need to check it. Ask the register and you get
+exactly \textbf{452} entities reporting Siemens Aktiengesellschaft as their direct
+consolidation parent, each traceable to its record by LEI.
 
 \vspace{2mm}
 \takeaway{So do not trust the answer. Trust the query, and read it.}
@@ -118,12 +162,12 @@ their direct consolidation parent, each one traceable to its record by LEI.
 \heading{The register}
 
 GLEIF publishes the Legal Entity Identifier register as CC0 open data with an
-official RDF ontology --- a real regulatory source rather than an encyclopaedic or
-synthetic graph. We pin one 8-hourly publish and query it locally.
+official RDF ontology --- a regulatory source, not an encyclopaedic or synthetic
+graph. We pin one 8-hourly publish and query it locally.
 
 \vspace{1mm}
 \panel{%
-\BodyF
+{\renewcommand{\arraystretch}{1.1}\BodyF
 \begin{tabular}{@{}l@{\hspace{8mm}}r@{}}
 Level 1 entity records         & 3{,}382{,}301 \\
 \quad of which \textsc{issued} & 1{,}940{,}941 \\
@@ -132,11 +176,10 @@ Triples in the store           & 69.7\,M \\
 Populated predicates           & 27 \\
 Guard vocabulary               & 71 terms \\
 Snapshot                       & \texttt{20260723-1600} \\
-\end{tabular}
-\par\vspace{4mm}
-{\SmallF\textcolor{muted}{The 71-term guard vocabulary is everything a query may
-name: all 27 populated predicates, plus the 44 classes and enumerated code values
-they take. Every term is count-backed --- it is in the prompt because it is in the
+\end{tabular}}
+\par\vspace{3mm}
+{\SmallF\textcolor{muted}{The guard vocabulary is everything a query may name: all
+27 populated predicates plus 44 classes and code values, each count-backed from the
 graph.}}}
 
 \heading{The system}
@@ -144,24 +187,22 @@ graph.}}}
 A local open-weight model (\texttt{gpt-oss-20b}, served through LM Studio at
 temperature 0, prompting only, no training) turns the question into candidate
 SPARQL. A guard checks the query \emph{before} it runs; a bounded repair loop of at
-most two retries feeds the guard's diagnostic back to the model. The query, its
-rows and the LEIs behind them are returned with every answer.
-
-\vspace{3mm}
-\includegraphics[width=\linewidth]{../blog/pipeline.pdf}
+most two retries feeds its diagnostic back to the model. The query, its rows and
+the LEIs behind them return with every answer.
 
 \vspace{2mm}
-{\SmallF\textcolor{muted}{One shot, not agentic search: the guard, and not iterative
-graph exploration, is what keeps the output valid. The loop never retries on an
-empty result --- for a question the register cannot answer, empty is the right
-answer.}}
+\includegraphics[width=0.85\linewidth]{../blog/pipeline.pdf}
+
+\vspace{1mm}
+{\SmallF\textcolor{muted}{One shot, not agentic search: the guard, not iterative
+graph exploration, keeps the output valid. The loop never retries on an empty
+result --- for an unanswerable question, empty is right.}}
 
 \heading{Cost}
 
-Queries return in well under a second, except full-population aggregates at 14--28
-seconds. Latency is dominated by generation (15--40 seconds), not by the store. The
-whole system runs on one machine and makes no external call, so the data never
-leaves the premises.
+Queries return well under a second, except full-population aggregates (14--28s).
+Generation, not the store, dominates latency (15--40s). The whole system runs on
+one machine and never calls out, so the data stays on premises.
 
 \end{minipage}
 \hspace{\colgap}
@@ -169,60 +210,40 @@ leaves the premises.
 \begin{minipage}[t]{\colw}
 \BodyF
 
+\vspace{\mapreserve}
 \heading{One question, end to end}
 
 A held-out item (\texttt{h55}), exactly as the system logged it. This is the whole
-audit trail an analyst sees.
+audit trail an analyst sees. Like most repairs, the fix is a one-token vocabulary
+swap; the guard's diagnostic already names the correct replacement, which is why a
+single retry is usually enough.
+
+\vspace{2mm}
+\includegraphics[width=\linewidth]{../blog/walkthrough.pdf}
 
 \vspace{1mm}
-\stage{Question}{business language, names no predicate}
-\codepanel[tealsoft]{What is the legal form name of the direct\\
-consolidation parent of 'AMERICAN AXLE \&\\
-MANUFACTURING, INC.'?}
-
-\vspace{-4mm}
-\stage{Attempt 1}{model output --- rejected by the guard}
-\codepanel{SELECT ?parentFormLabel WHERE \{\\
-\ \ ?child a gleif-L1:RegisteredEntity ;\\
-\ \ \ \ \ \ \ \ \ gleif-L1:hasLegalName\\
-\ \ \ \ \ \ \ \ \ \ \ "AMERICAN AXLE \& MANUFACTURING, INC." .\\
-\ \ ?child kgx:hasDirectConsolidationParent ?parent .\\
-\ \ \textcolor{warm}{?parent gleif-base:hasLegalForm ?form .}\\
-\ \ ?form rdfs:label ?parentFormLabel .\\
-\}}
-
-\vspace{-4mm}
-\panel[warmsoft]{\SmallF\textbf{\textcolor{warm}{Guard:}} unknown vocabulary
-\texttt{gleif-base:hasLegalForm} --- the predicate does not exist in the graph.
-Closest match: \texttt{gleif-L1:hasLegalForm}. The query never reaches the store.}
-
-\vspace{-4mm}
-\stage{Attempt 2}{repaired --- passes the guard, executes}
-\codepanel{PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema\#>\\
-SELECT ?parentFormLabel WHERE \{\\
-\ \ ?child a gleif-L1:RegisteredEntity ;\\
-\ \ \ \ \ \ \ \ \ gleif-L1:hasLegalName\\
-\ \ \ \ \ \ \ \ \ \ \ "AMERICAN AXLE \& MANUFACTURING, INC." .\\
-\ \ ?child kgx:hasDirectConsolidationParent ?parent .\\
-\ \ \textcolor{teal}{?parent gleif-L1:hasLegalForm ?form .}\\
-\ \ ?form rdfs:label ?parentFormLabel .\\
-\}}
-
-\vspace{-4mm}
-\stage{Answer, with the records behind it}{}
-\codepanel[tealsoft]{parentFormLabel\\
------------------\\
-"Corporation"\\[7mm]
-\textcolor{muted}{child\ \ lei:RY5TAKFOBLDUGX31MS24\\
-parent lei:254900SMQY98VFKNCC32\\
-form\ \ \ elf:XTIQ\ \ (ISO 20275)}}
+{\SmallF\textcolor{muted}{The guard rejects \texttt{gleif-base:hasLegalForm}: no such
+predicate in the graph. The diagnostic and its closest match go back to the model,
+which repairs the line and the query executes.}}
 
 \heading{What the guard does not do}
 
 The guard is an existence check, not a semantic one. It guarantees that the query
 parses and that every term it names is in the graph, which is what stops a
 hallucinated predicate from ever reaching the store. It does \textbf{not} guarantee
-that the query means what the question asked.
+that the query means what the question asked. A stricter check could compare
+predicate domains and ranges against the ontology, catching some of what slips
+through here --- at the cost of also rejecting correct queries the schema does
+not anticipate.
+
+\vspace{1mm}
+\panel{%
+\BodyF
+\textbf{\textcolor{teal}{Checks:}} the query parses as SPARQL; every predicate,
+class and code value it names is in the 71-term vocabulary.\\[2mm]
+\textbf{\textcolor{warm}{Does not check:}} whether that predicate is the right
+one, whether a filter or aggregation matches the question, or whether the matched
+entity is the one intended.}
 
 \vspace{2mm}
 \takeaway{That boundary is the design and not a gap in it: a wrong answer arrives
@@ -232,25 +253,26 @@ as a readable query returning wrong rows, never as fluent prose.}
 
 All twelve held-out errors are queries that ran and returned the wrong rows. None
 is invalid, none names a predicate that does not exist, and the model declines
-every out-of-scope and absent-entity question it is given.
+every out-of-scope and absent-entity question it is given. Development errors
+cluster the same way, which is why later schema revisions added vocabulary
+coverage rather than tried to make the guard itself smarter.
 
-\vspace{1mm}
-\begin{center}\TabF
-\begin{tabular}{@{}lc@{}}
-\toprule
-\textbf{Error type} & \textbf{n} \\
-\midrule
-String / entity matching        & 4 \\
-Literal typing                  & 2 \\
-Wrong predicate / value / scope & 3 \\
-Result shape / aggregation      & 3 \\
-\midrule
-\textbf{Total} & \textbf{12} \\
-\bottomrule
-\end{tabular}
+\vspace{2mm}
+\begin{center}
+\begin{tikzpicture}[x=0.2\linewidth,y=1mm]
+\errbar{51}{4}{String / entity matching}
+\errbar{34}{2}{Literal typing}
+\errbar{17}{3}{Wrong predicate / value / scope}
+\errbar{0}{3}{Result shape / aggregation}
+\draw[rulec] (0,-4) -- (4,-4);
+\node[anchor=north, font=\SmallF, text=muted] at (0,-4) {0};
+\node[anchor=north, font=\SmallF, text=muted] at (4,-4) {4};
+\end{tikzpicture}
 \end{center}
+{\SmallF\textcolor{muted}{All twelve errors, by type; none is a vocabulary or
+schema failure.}}
 
-\vspace{-2mm}
+\vspace{-1mm}
 \takeaway{Every one of the twelve is visible in the query itself, which is the
 property the setting demanded.}
 
@@ -264,11 +286,10 @@ property the setting demanded.}
 
 144 questions over six tiers, written from a specification fixed \emph{before}
 instantiation around a KYC analyst, a supervisor and a fund-operations user, in
-business language naming no predicate or IRI. Every reference query is executed
-against the pinned snapshot, so its result --- the gold answer --- cannot drift
-from the graph. The 54-question development set drove three schema revisions; the
-90-question held-out set was written afterwards against a frozen prompt and
-informed none.
+business language naming no predicate or IRI. Every reference query runs against
+the pinned snapshot, so its result --- the gold answer --- cannot drift from the
+graph. The 54-question development set drove three schema revisions; the
+90-question held-out set came afterwards, against a frozen prompt.
 
 \vspace{1mm}
 \begin{center}\TabF
@@ -296,60 +317,52 @@ First-try / repaired      & 48/6 & 82/8 & 80/9 \\
 
 \heading{What each part buys}
 
-\begin{center}\TabF
-\begin{tabular}{@{}lcc@{}}
-\toprule
-\textbf{Held-out (20B)} & \textbf{Valid} & \textbf{Acc} \\
-\midrule
-Full system (guard + repair) & 100\%  & 86.7\% \\
-\quad $-$ guard \& repair    & 91.1\% & 80.0\% \\
-\midrule
-\quad $-$ vocabulary         & 100\%  & 32.2\% \\
-\quad $-$ schema             & 100\%  & 13.3\% \\
-\bottomrule
-\end{tabular}
+\vspace{1mm}
+\begin{center}
+\begin{tikzpicture}[x=0.01\linewidth,y=1mm]
+\abbar{51}{86.7}{Full system (guard + repair)}{teal}
+\abbar{34}{80.0}{$-$ guard \& repair}{teal!55}
+\abbar{17}{32.2}{$-$ vocabulary}{warm!70}
+\abbar{0}{13.3}{$-$ schema}{warm}
+\baraxis
+\end{tikzpicture}
 \end{center}
 
-\vspace{-2mm}
-{\SmallF\textcolor{muted}{The in-prompt schema does most of the work: strip the
-vocabulary and accuracy falls to 32.2\%, strip the schema and it collapses to
-13.3\%. The guard and the two-retry loop add the last 6.7 points and take validity
-to 100\%.}}
+\vspace{-3mm}
+{\SmallF\textcolor{muted}{Held-out accuracy (20B): the in-prompt schema does most of
+the work --- strip the vocabulary and accuracy falls to 32.2\%, strip the schema and
+it collapses to 13.3\%. The guard and the two-retry loop add the last 6.7 points and
+take validity to 100\%.}}
 
 \heading{Models}
 
-\begin{center}\TabF
-\begin{tabular}{@{}lccc@{}}
-\toprule
-\textbf{Held-out} & \textbf{Acc} & \textbf{95\% CI} & \textbf{Valid} \\
-\midrule
-\multicolumn{4}{@{}l}{\emph{Local, open-weight}} \\
-\quad gpt-oss-20b        & 86.7\% & 78--92 & 100\% \\
-\quad gpt-oss-120b       & 87.8\% & 79--93 & 98.9\% \\
-\quad Qwen2.5-Coder-32B  & 85.6\% & 77--91 & 97\% \\
-\quad Llama-3.3-70B      & 70.0\% & 60--78 & 97\% \\
-\midrule
-\multicolumn{4}{@{}l}{\emph{Non-local reference (not deployable)}} \\
-\quad gpt-5              & 90.0\% & 82--95 & 100\% \\
-\bottomrule
-\end{tabular}
+\vspace{1mm}
+\begin{center}
+\begin{tikzpicture}[x=0.01\linewidth,y=1mm]
+\modbar{68}{86.7}{78}{92}{gpt-oss-20b}{teal}
+\modbar{51}{87.8}{79}{93}{gpt-oss-120b}{teal}
+\modbar{34}{85.6}{77}{91}{Qwen2.5-Coder-32B}{teal}
+\modbar{17}{70.0}{60}{78}{Llama-3.3-70B}{teal}
+\modbar{0}{90.0}{82}{95}{gpt-5 --- non-local, not deployable}{muted}
+\baraxis
+\end{tikzpicture}
 \end{center}
 
-\vspace{-2mm}
-{\SmallF\textcolor{muted}{Model size is not the bottleneck and open versus closed is
-not either; training focus is. The three code-tuned models sit inside one another's
-intervals, the general instruction model is 16 points below them, and the closed
-frontier reference leads by about three points.}}
+\vspace{-3mm}
+{\SmallF\textcolor{muted}{Held-out accuracy, 95\% CI whiskers: model size is not the
+bottleneck and open versus closed is not either; training focus is. The three
+code-tuned models sit inside one another's intervals, the general instruction model
+is 16 points below them, and the closed frontier reference leads by about three
+points.}}
 
 \heading{Limits, and what is next}
 
 144 questions on one graph with a thin schema, one snapshot, one machine, one run
 per model, and no user study yet. The construction, however, is not specific to
 corporate structure: it is a model writing queries against any source described by
-an ontology. Real data sits across relational stores, graph stores, document stores
-and PDFs, each with its own query language --- extending the same
-generate--guard--repair loop across them, routing each question to the store that
-can answer it and keeping every answer decomposable into a checkable query, is the
+an ontology. Real data sits across relational, graph and document stores and PDFs,
+each with its own query language --- extending the same generate--guard--repair
+loop across them, routing each question to the store that can answer it, is the
 direction we intend to pursue.
 
 \end{minipage}

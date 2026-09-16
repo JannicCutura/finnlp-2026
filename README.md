@@ -51,6 +51,8 @@ data/*.csv  --gleif_to_rdf-->  data/gleif.nt  --load_oxigraph-->  data/oxigraph/
 | `score.py` | Score results vs gold: execution accuracy (RelaxedEM, set compare), QALD macro-F1 (empty-answer convention), TrustSQL-style reliability, validity, first/repaired/unresolved, per-tier, error taxonomy. | `data/oxigraph`, questions JSON, a run JSON | stdout + `results/scored*.json` |
 | `validate_tiers.py` | **Design gate.** One hand-written reference query per tier, run before authoring questions, to confirm each tier is expressible and fast enough (esp. tier c reified transitive paths). | `data/oxigraph` | stdout |
 | `trace.py` | Trace one question through the real pipeline stage-by-stage (reuses `pipeline.py`); Part B forces the guard→repair path. | `data/oxigraph`, LM Studio | stdout |
+| `ablate_guard.py` | Reconstruct the guard/repair ablation offline from a logged run: model alone, +guard, +guard+repair. No model calls. | `data/oxigraph`, questions JSON, run JSON | stdout (`--latex` for the table) |
+| `significance.py` | Paired **exact McNemar** over logged runs: guard+repair vs the raw model, and each model vs `gpt-oss-20b`. Caches gold and guard-bypassed executions under `build/`, so a re-run is cheap. No model calls. | `data/oxigraph`, questions JSON, run JSONs | stdout + `results/significance.json` |
 
 ## Evaluation sets (`eval/`)
 
@@ -64,8 +66,8 @@ reports `f1+f2+f3` collapsed as tier `f`.
   mapping, balance rule, authoring rules). **Types are fixed here before instantiation.**
 - `questions.json` — **dev set (54)**. Used to refine the prompt/schema; drove three
   schema revisions (92.6% → 98.1%). Optimistic ceiling.
-- `questions_hard.json` — **held-out set (30)**. Authored harder; the prompt was frozen;
-  informed no revision. The generalization estimate (80.0%).
+- `questions_hard.json` — **held-out set (90)**. Authored harder; the prompt was frozen;
+  informed no revision. The generalization estimate (86.7%).
 - `pilot.json` — 10-item smoke test.
 
 The dev/held-out split is a train/test discipline where the "training" is hand-editing
