@@ -91,62 +91,47 @@
 \setlength{\colw}{0.315\textwidth}
 \newlength{\colgap}
 \setlength{\colgap}{0.0275\textwidth}
-% Width spanning columns 1+2, used once to run the subsidiary map across
-% both columns.
+% Width spanning two adjacent columns (same for any pair -- all columns and
+% gaps are equal width). Used once for the map (columns 1+2, at the bottom)
+% and once for the walkthrough figure (columns 2+3, at the top).
 \newlength{\twocolw}
 \setlength{\twocolw}{\dimexpr 2\colw+\colgap\relax}
+
 \newlength{\mapdispw}
 \setlength{\mapdispw}{\dimexpr \twocolw*90/100\relax}
 \newlength{\mapht}
 \setlength{\mapht}{\dimexpr \mapdispw*19584/47520\relax}
 
+\newlength{\wtdispw}
+\setlength{\wtdispw}{\dimexpr \twocolw*92/100\relax}
+\newlength{\wtht}
+\setlength{\wtht}{\dimexpr \wtdispw*87008/484202\relax}
+% Left margin that centers the (narrower-than-twocolw) walkthrough figure
+% within the columns 2+3 span, instead of leaving it flush against column 2's
+% left edge with all the slack on column 3's side.
+\newlength{\wtmargin}
+\setlength{\wtmargin}{\dimexpr (\twocolw-\wtdispw)/2\relax}
+
 \begin{document}
-% Column 1 opens with the map (see below); column 2 must reserve the same
-% height -- map plus its one-line caption -- before starting its own first
-% heading, otherwise that heading would land underneath the map bleeding
-% across from column 1.
-\newlength{\mapreserve}
-\setlength{\mapreserve}{\dimexpr \mapht+12mm\relax}
 \BodyF
 
-% =====================================================================
-%  HEADER
-% =====================================================================
-\begin{tikzpicture}
-  \node[fill=ink, rounded corners=8pt, inner xsep=16mm, inner ysep=14mm,
-        text width=\dimexpr\linewidth-32mm\relax, align=left] {%
-    \color{white}
-    {\TitleF Trust the Query, Not the Answer\par}
-    \vspace{4mm}
-    {\SubtitleF\color{tealsoft} Auditable Text-to-SPARQL over the GLEIF Register\par}
-    \vspace{9mm}
-    {\BylineF Jannic Alexander Cutura\quad\textcolor{rulec}{\textbar}\quad
-     European Central Bank\quad\textcolor{rulec}{\textbar}\quad DSTI School of Engineering
-     \hfill \texttt{github.com/JannicCutura/finnlp-2026}\par}};
-\end{tikzpicture}
+% Column 3 must reserve blank space at its TOP matching the walkthrough
+% figure (plus its caption) that bleeds in from column 2, before starting
+% its own first heading.
+\newlength{\wtreserve}
+\setlength{\wtreserve}{\dimexpr \wtht+25mm\relax}
+% Column 2 must reserve blank space at its BOTTOM matching the map (plus
+% its caption) that bleeds in from column 1.
+\newlength{\mapblank}
+\setlength{\mapblank}{\dimexpr \mapht+12mm\relax}
 
-\vspace{6mm}
-
-% =====================================================================
-%  THREE COLUMNS
-% =====================================================================
-\noindent
-% ---------------------------------------------------------------- COL 1
-\begin{minipage}[t]{\colw}
-\BodyF
-
-% \raisebox{-\height}{...}: as the very first item in a minipage[t], a bare
-% \includegraphics would set the box's reference point from the IMAGE's own
-% height (not a text baseline like every other column), silently promoting
-% the whole map height into the row's height component on top of its depth --
-% inflating the effective row height far more than the image's real size.
-\raisebox{-\height}{\includegraphics[width=\mapdispw]{../blog/subsidiary_map_poster.pdf}}
-
-\vspace{1mm}
-\parbox{\mapdispw}{\centering\SmallF\textcolor{muted}{452 direct
-subsidiaries of Siemens Aktiengesellschaft, by country of registration --- circle
-area proportional to count.}}
-
+% Columns 1 and 2 carry different amounts of their own text before they
+% both meet the shared map at the bottom. Box each column's own content
+% once so its exact height is measurable, then pad whichever is shorter --
+% otherwise the map (drawn once, bleeding right from column 1) would not
+% line up with column 2's reserved blank band at the same height.
+\newsavebox{\colAbox}
+\sbox{\colAbox}{\parbox[t]{\colw}{\BodyF
 \heading{The problem}
 
 In anti-money-laundering screening, credit-risk and supervision an answer is
@@ -202,29 +187,27 @@ result --- for an unanswerable question, empty is right.}}
 
 Queries return well under a second, except full-population aggregates (14--28s).
 Generation, not the store, dominates latency (15--40s). The whole system runs on
-one machine and never calls out, so the data stays on premises.
+one machine and never calls out, so the data stays on premises.}}
 
-\end{minipage}
-\hspace{\colgap}
-% ---------------------------------------------------------------- COL 2
-\begin{minipage}[t]{\colw}
-\BodyF
-
-\vspace{\mapreserve}
-\heading{One question, end to end}
-
-A held-out item (\texttt{h55}), exactly as the system logged it. This is the whole
-audit trail an analyst sees. Like most repairs, the fix is a one-token vocabulary
-swap; the guard's diagnostic already names the correct replacement, which is why a
-single retry is usually enough.
-
-\vspace{2mm}
-\includegraphics[width=\linewidth]{../blog/walkthrough.pdf}
+\newsavebox{\colBbox}
+\sbox{\colBbox}{\parbox[t]{\colw}{\BodyF
+% \raisebox{-\height}{...}: as the first item in this box, a bare
+% \includegraphics would set the box's reference point from the image's own
+% height rather than a text baseline, which upsets the row-height
+% calculation once this box sits beside column 3's minipage.
+\hspace{\wtmargin}\raisebox{-\height}{\includegraphics[width=\wtdispw]{../blog/walkthrough.pdf}}
 
 \vspace{1mm}
-{\SmallF\textcolor{muted}{The guard rejects \texttt{gleif-base:hasLegalForm}: no such
-predicate in the graph. The diagnostic and its closest match go back to the model,
-which repairs the line and the query executes.}}
+\hspace{\wtmargin}\parbox{\wtdispw}{\centering\SmallF\textcolor{muted}{The guard
+rejects \texttt{gleif-base:hasLegalForm}: no such predicate in the graph. The
+diagnostic and its closest match go back to the model, which repairs the line and
+the query executes.}}
+
+\heading{One question, end to end}
+
+A held-out item (\texttt{h55}), exactly as the system logged it above. Like most
+repairs, the fix is a one-token vocabulary swap; the guard's diagnostic already
+names the correct replacement, which is why a single retry is usually enough.
 
 \heading{What the guard does not do}
 
@@ -274,7 +257,71 @@ schema failure.}}
 
 \vspace{-1mm}
 \takeaway{Every one of the twelve is visible in the query itself, which is the
-property the setting demanded.}
+property the setting demanded.}}}
+
+\newlength{\rowAht}\newlength{\rowAdp}
+\settoheight{\rowAht}{\usebox{\colAbox}}\settodepth{\rowAdp}{\usebox{\colAbox}}
+\newlength{\rowBht}\newlength{\rowBdp}
+\settoheight{\rowBht}{\usebox{\colBbox}}\settodepth{\rowBdp}{\usebox{\colBbox}}
+\newlength{\rowA}\setlength{\rowA}{\dimexpr\rowAht+\rowAdp\relax}
+\newlength{\rowB}\setlength{\rowB}{\dimexpr\rowBht+\rowBdp\relax}
+\newlength{\rowbase}
+\newlength{\padA}
+\newlength{\padB}
+\ifdim\rowA>\rowB
+  \setlength{\rowbase}{\rowA}
+\else
+  \setlength{\rowbase}{\rowB}
+\fi
+\setlength{\padA}{\dimexpr\rowbase-\rowA\relax}
+\setlength{\padB}{\dimexpr\rowbase-\rowB\relax}
+
+% =====================================================================
+%  HEADER
+% =====================================================================
+\begin{tikzpicture}
+  \node[fill=ink, rounded corners=8pt, inner xsep=16mm, inner ysep=14mm,
+        text width=\dimexpr\linewidth-32mm\relax, align=left] {%
+    \color{white}
+    {\TitleF Trust the Query, Not the Answer\par}
+    \vspace{4mm}
+    {\SubtitleF\color{tealsoft} Auditable Text-to-SPARQL over the GLEIF Register\par}
+    \vspace{9mm}
+    {\BylineF Jannic Alexander Cutura\quad\textcolor{rulec}{\textbar}\quad
+     European Central Bank\quad\textcolor{rulec}{\textbar}\quad DSTI School of Engineering
+     \hfill \texttt{github.com/JannicCutura/finnlp-2026}\par}};
+\end{tikzpicture}
+
+\vspace{6mm}
+
+% =====================================================================
+%  THREE COLUMNS
+% =====================================================================
+\noindent
+% ---------------------------------------------------------------- COL 1
+\begin{minipage}[t]{\colw}
+\BodyF
+
+\usebox{\colAbox}
+
+\vspace{\padA}
+\includegraphics[width=\mapdispw]{../blog/subsidiary_map_poster.pdf}
+
+\vspace{1mm}
+\parbox{\mapdispw}{\centering\SmallF\textcolor{muted}{452 direct
+subsidiaries of Siemens Aktiengesellschaft, by country of registration --- circle
+area proportional to count.}}
+
+\end{minipage}
+\hspace{\colgap}
+% ---------------------------------------------------------------- COL 2
+\begin{minipage}[t]{\colw}
+\BodyF
+
+\usebox{\colBbox}
+
+\vspace{\padB}
+\vspace{\mapblank}
 
 \end{minipage}
 \hspace{\colgap}
@@ -282,17 +329,18 @@ property the setting demanded.}
 \begin{minipage}[t]{\colw}
 \BodyF
 
+\vspace{\wtreserve}
 \heading{Benchmark}
 
-144 questions over six tiers, written from a specification fixed \emph{before}
+144 questions over six tiers, from a specification fixed \emph{before}
 instantiation around a KYC analyst, a supervisor and a fund-operations user, in
 business language naming no predicate or IRI. Every reference query runs against
-the pinned snapshot, so its result --- the gold answer --- cannot drift from the
-graph. The 54-question development set drove three schema revisions; the
-90-question held-out set came afterwards, against a frozen prompt.
+the pinned snapshot, so its result cannot drift from the graph. The 54-question
+development set drove three schema revisions; the 90-question held-out set came
+afterwards, against a frozen prompt.
 
 \vspace{1mm}
-\begin{center}\TabF
+\begin{center}{\renewcommand{\arraystretch}{1.15}\TabF
 \begin{tabular}{@{}lccc@{}}
 \toprule
  & \multicolumn{2}{c}{\textbf{20B}} & \textbf{120B} \\
@@ -312,14 +360,14 @@ QALD macro-F1             & 0.981 & 0.897 & 0.893 \\
 Validity rate             & 100\% & 100\% & 98.9\% \\
 First-try / repaired      & 48/6 & 82/8 & 80/9 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{center}
 
 \heading{What each part buys}
 
 \vspace{1mm}
 \begin{center}
-\begin{tikzpicture}[x=0.01\linewidth,y=1mm]
+\begin{tikzpicture}[x=0.0082\linewidth,y=1mm]
 \abbar{51}{86.7}{Full system (guard + repair)}{teal}
 \abbar{34}{80.0}{$-$ guard \& repair}{teal!55}
 \abbar{17}{32.2}{$-$ vocabulary}{warm!70}
@@ -329,16 +377,15 @@ First-try / repaired      & 48/6 & 82/8 & 80/9 \\
 \end{center}
 
 \vspace{-3mm}
-{\SmallF\textcolor{muted}{Held-out accuracy (20B): the in-prompt schema does most of
-the work --- strip the vocabulary and accuracy falls to 32.2\%, strip the schema and
-it collapses to 13.3\%. The guard and the two-retry loop add the last 6.7 points and
-take validity to 100\%.}}
+{\SmallF\textcolor{muted}{Held-out accuracy (20B): stripping vocabulary drops it to
+32.2\%, stripping schema to 13.3\%. Guard and repair add the last 6.7 points, to
+100\% validity.}}
 
 \heading{Models}
 
 \vspace{1mm}
 \begin{center}
-\begin{tikzpicture}[x=0.01\linewidth,y=1mm]
+\begin{tikzpicture}[x=0.0082\linewidth,y=1mm]
 \modbar{68}{86.7}{78}{92}{gpt-oss-20b}{teal}
 \modbar{51}{87.8}{79}{93}{gpt-oss-120b}{teal}
 \modbar{34}{85.6}{77}{91}{Qwen2.5-Coder-32B}{teal}
@@ -349,21 +396,20 @@ take validity to 100\%.}}
 \end{center}
 
 \vspace{-3mm}
-{\SmallF\textcolor{muted}{Held-out accuracy, 95\% CI whiskers: model size is not the
-bottleneck and open versus closed is not either; training focus is. The three
-code-tuned models sit inside one another's intervals, the general instruction model
-is 16 points below them, and the closed frontier reference leads by about three
-points.}}
+{\SmallF\textcolor{muted}{95\% CI whiskers: size is not the bottleneck and open
+versus closed is not either; training focus is. The code-tuned models sit inside
+one another's intervals, 16 points above the general instruction model.}}
 
 \heading{Limits, and what is next}
 
-144 questions on one graph with a thin schema, one snapshot, one machine, one run
-per model, and no user study yet. The construction, however, is not specific to
-corporate structure: it is a model writing queries against any source described by
-an ontology. Real data sits across relational, graph and document stores and PDFs,
-each with its own query language --- extending the same generate--guard--repair
-loop across them, routing each question to the store that can answer it, is the
-direction we intend to pursue.
+144 questions on one graph with a thin schema, one snapshot, one run per model, and
+no user study yet. The construction, though, is not specific to corporate
+structure: it is a model writing queries against any source described by an
+ontology. Real data sits across relational, graph and document stores, each with
+its own query language --- extending the same generate--guard--repair loop across
+them is the direction we intend to pursue. The nearer-term test is whether the
+same guard holds up on a schema an order of magnitude larger, where a single typo
+has far more plausible near-misses to repair towards.
 
 \end{minipage}
 
